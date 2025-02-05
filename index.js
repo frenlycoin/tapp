@@ -25,6 +25,7 @@ class App {
     miningActive;
     miningRestart;
     viewportHeight;
+    start;
 
     constructor() {
         this.simulationRunning = false;
@@ -103,7 +104,7 @@ class App {
             this.loadData();
 
             Telegram.WebApp.onEvent("activated", function() {
-                alert(userData.start_param);
+                alert(app.userData.start_param);
                 location.reload();
             });
         } catch (e) {
