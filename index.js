@@ -110,7 +110,7 @@ class App {
                 // } else {
                 //     // location.reload();
                 // }
-                alert*(app.userData.start_param);
+                alert(app.userData.start_param);
                 Telegram.WebApp.openTelegramLink('t.me/FrenlyNews/195');
             });
         } catch (e) {
