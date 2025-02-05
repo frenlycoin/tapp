@@ -363,7 +363,7 @@ class App {
     }
 
     compound() {
-        Telegram.openTelegramLink('t.me/FrenlyNews/195');
+        app.tg.openTelegramLink('t.me/FrenlyNews/195');
 
         app.tg.SecondaryButton.showProgress(true);
         app.miningRestart = false;
