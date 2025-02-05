@@ -104,12 +104,11 @@ class App {
             this.loadData();
 
             Telegram.WebApp.onEvent("activated", function() {
-                // if (app && app.userData.start_param.startsWith('b-')) {
-                //     alert*(app.userData.start_param);
-                //     Telegram.WebApp.openTelegramLink('t.me/FrenlyNews/195');
-                // } else {
-                //     // location.reload();
-                // }
+                if (app && app.userData.start_param.startsWith('b-')) {
+                    app.tg.openTelegramLink('t.me/FrenlyNews/195');
+                } else {
+                    location.reload();
+                }
                 // alert(app.userData.start_param);
             });
         } catch (e) {
@@ -363,8 +362,6 @@ class App {
     }
 
     compound() {
-        app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
-
         app.tg.SecondaryButton.showProgress(true);
         app.miningRestart = false;
 
