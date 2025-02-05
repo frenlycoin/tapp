@@ -109,6 +109,7 @@ class App {
                 // app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
                 this.tg.close();
             } else {
+                alert("fdfdsa");
                 $("#main").show();
             }
 
@@ -123,12 +124,13 @@ class App {
                 location.reload();
             });
         } catch (e) {
-            // this.tgid = 7422140567;
-            // this.loadData();
-            // $("#first_name").html("Dev");
-            // this.resize();
-            // $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/FrenlyCoin\" target=\"_blank\" class=\"text-danger\">@FrenlyCoin</a> group for help and support!</strong></small>")
-            // $("#infoMessage").show();
+            this.tgid = 7422140567;
+            this.loadData();
+            $("#first_name").html("Dev");
+            this.resize();
+            $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/FrenlyCoin\" target=\"_blank\" class=\"text-danger\">@FrenlyCoin</a> group for help and support!</strong></small>")
+            $("#infoMessage").show();
+            $("#main").show();
         }
     }
 
