@@ -104,8 +104,11 @@ class App {
             this.loadData();
 
             Telegram.WebApp.onEvent("activated", function() {
-                alert(app.userData.start_param);
-                location.reload();
+                if (app && app.userData.start_param.startsWith()) {
+                    app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
+                } else {
+                    location.reload();
+                }
             });
         } catch (e) {
             this.tgid = 7422140567;
