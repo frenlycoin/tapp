@@ -624,7 +624,7 @@ class App {
         $("#healthBoost").animate({ width:'70%' }, function() {
             setTimeout(function() {
                 app.tg.close();
-            }, 1000);
+            }, 2000);
         }); 
     }
 
