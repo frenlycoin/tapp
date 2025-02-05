@@ -363,7 +363,7 @@ class App {
     }
 
     compound() {
-        app.tg.openTelegramLink('t.me/FrenlyNews/195');
+        app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
 
         app.tg.SecondaryButton.showProgress(true);
         app.miningRestart = false;
