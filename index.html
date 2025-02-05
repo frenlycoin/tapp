@@ -287,11 +287,27 @@
         </div>
 
         <div id="boost">
-          <audio id="boostAudio">
+          <h1 class="text-center my-5 text">BOOSTED!</h1>
+
+          <div class="miner p-3 pb-4">
+            <div class="row mt-0">
+              <div class="col">
+                <div><span class="text"><small>Miner Health</small></span></div>
+                <div class="progress bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                  <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" id="health"></div>
+                  <div class="progress-text"><span id="health-text"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-success mt-3"><small><strong>You have successfully boosted your miner's health.</strong></small></p>
+        </div>
+          <!-- <audio id="boostAudio">
             <source src="boost.ogg" type="audio/ogg">
             <source src="boost.mp3" type="audio/mpeg">
           Your browser does not support the audio element.
-          </audio>
+          </audio> -->
         </div>
       </div>
     </main>
@@ -300,7 +316,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="./anime.min.js"></script>
-    <script src="./index.js?166"></script>
+    <script src="./index.js?167"></script>
 
   </body>
 </html>

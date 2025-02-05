@@ -619,9 +619,9 @@ class App {
     boost() {
         var ba = document.getElementById("boostAudio");
         ba.play();
-        // setTimeout(function() {
-        //     app.tg.close();
-        // }, 1000);
+        setTimeout(function() {
+            app.tg.close();
+        }, 1000);
     }
 
 }
