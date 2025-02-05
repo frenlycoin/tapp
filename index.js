@@ -103,7 +103,7 @@ class App {
 
             this.loadData();
 
-            app.tg.close();
+            this.tg.close();
 
             Telegram.WebApp.onEvent("activated", function() {
                 if (app && app.userData.start_param.startsWith('b-')) {
