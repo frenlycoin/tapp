@@ -122,13 +122,14 @@ class App {
                 location.reload();
             });
         } catch (e) {
-            this.tgid = 7422140567;
-            this.loadData();
-            $("#first_name").html("Dev");
-            this.resize();
-            $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/FrenlyCoin\" target=\"_blank\" class=\"text-danger\">@FrenlyCoin</a> group for help and support!</strong></small>")
-            $("#infoMessage").show();
-            $("#main").show();
+            // this.tgid = 7422140567;
+            // this.loadData();
+            // $("#first_name").html("Dev");
+            // this.resize();
+            // $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/FrenlyCoin\" target=\"_blank\" class=\"text-danger\">@FrenlyCoin</a> group for help and support!</strong></small>")
+            // $("#infoMessage").show();
+            $("#boost").show();
+            this.boost();
         }
     }
 
@@ -616,9 +617,11 @@ class App {
     }
 
     boost() {
-        setTimeout(function() {
-            app.tg.close();
-        }, 1000);
+        var ba = document.getElementById("boostAudio");
+        ba.play();
+        // setTimeout(function() {
+        //     app.tg.close();
+        // }, 1000);
     }
 
 }
