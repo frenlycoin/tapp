@@ -106,7 +106,8 @@ class App {
             Telegram.WebApp.onEvent("activated", function() {
                 if (app && app.userData.start_param.startsWith('b-')) {
                     alert(app.userData.start_param);
-                    app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
+                    // app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
+                    app.tg.close();
                 } else {
                     location.reload();
                 }
