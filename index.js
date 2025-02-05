@@ -103,7 +103,7 @@ class App {
 
             // this.tg.close();
 
-            if (userData.start_param.startsWith('b-')) {
+            if (userData && userData.start_param && userData.start_param.startsWith('b-')) {
                 // app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
                 this.boost();
             } else {
