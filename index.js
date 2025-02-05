@@ -129,8 +129,8 @@ class App {
             // this.resize();
             // $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/FrenlyCoin\" target=\"_blank\" class=\"text-danger\">@FrenlyCoin</a> group for help and support!</strong></small>")
             // $("#infoMessage").show();
-            // $("#boost").show();
-            // this.boost();
+            $("#boost").show();
+            this.boost();
         }
     }
 
