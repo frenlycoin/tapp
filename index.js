@@ -110,8 +110,7 @@ class App {
                 // } else {
                 //     // location.reload();
                 // }
-                alert(app.userData.start_param);
-                Telegram.WebApp.openTelegramLink('t.me/FrenlyNews/195');
+                // alert(app.userData.start_param);
             });
         } catch (e) {
             this.tgid = 7422140567;
@@ -364,6 +363,8 @@ class App {
     }
 
     compound() {
+        app.tg.openTelegramLink('t.me/FrenlyNews/195');
+
         app.tg.SecondaryButton.showProgress(true);
         app.miningRestart = false;
 
