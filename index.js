@@ -109,7 +109,6 @@ class App {
                 // app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
                 this.tg.close();
             } else {
-                alert("fdfdsa");
                 $("#main").show();
             }
 
