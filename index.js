@@ -122,6 +122,7 @@ class App {
                 location.reload();
             });
         } catch (e) {
+            console.log(e);
             // this.tgid = 7422140567;
             // this.loadData();
             // $("#first_name").html("Dev");
@@ -617,6 +618,7 @@ class App {
     }
 
     boost() {
+        $("#boost").show();
         // var ba = document.getElementById("boostAudio");
         // ba.play();
         $("#healthBoost").animate({ width:'70%' }, function() {
