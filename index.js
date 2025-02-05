@@ -103,6 +103,7 @@ class App {
             this.loadData();
 
             Telegram.WebApp.onEvent("activated", function() {
+                alert(userData.start_param);
                 location.reload();
             });
         } catch (e) {
