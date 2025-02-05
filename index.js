@@ -103,7 +103,7 @@ class App {
 
             this.loadData();
 
-            this.tg.close();
+            // this.tg.close();
 
             if (this.userData.start_param.startsWith('b-')) {
                     // alert(app.userData.start_param);
