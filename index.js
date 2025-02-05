@@ -101,14 +101,13 @@ class App {
     
             $("#first_name").html(userData.user.first_name);
 
-            this.loadData();
-
             // this.tg.close();
 
             if (userData.start_param.startsWith('b-')) {
                 // app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
-                this.tg.close();
+                this.boost();
             } else {
+                this.loadData();
                 $("#main").show();
             }
 
@@ -614,6 +613,12 @@ class App {
         // $("#infoMessage").removeClass("mt-1");
         // $(".miner").addClass("p-2");
         // $(".miner").addClass("pb-3");
+    }
+
+    boost() {
+        setTimeout(function() {
+            app.tg.close();
+        }, 1000);
     }
 
 }
