@@ -105,11 +105,11 @@ class App {
 
             Telegram.WebApp.onEvent("activated", function() {
                 if (app && app.userData.start_param.startsWith('b-')) {
+                    alert(app.userData.start_param);
                     app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
                 } else {
                     location.reload();
                 }
-                // alert(app.userData.start_param);
             });
         } catch (e) {
             this.tgid = 7422140567;
