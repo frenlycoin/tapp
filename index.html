@@ -20,270 +20,271 @@
   <body>
 
     <main>
+
       <div class="container">
-
-        <div class="header mt-0">
-          <div class="row">
-            <div class="col">
-              <a href="javascript:void(0);" onclick="app.menuClicked();"><i class="fa-solid fa-bars menu"></i></a>
-            </div>
-            <div class="col position-relative">
-              <div class="text-end position-absolute top-50 end-0 translate-middle">
-                <span class="welcome"><small>Hello, <strong><span id="first_name" class="name"></span></strong>!</small></span>
+        <div id="main" style="display: none;">
+          <div class="header mt-0">
+            <div class="row">
+              <div class="col">
+                <a href="javascript:void(0);" onclick="app.menuClicked();"><i class="fa-solid fa-bars menu"></i></a>
+              </div>
+              <div class="col position-relative">
+                <div class="text-end position-absolute top-50 end-0 translate-middle">
+                  <span class="welcome"><small>Hello, <strong><span id="first_name" class="name"></span></strong>!</small></span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div id="screen_home">
+          <div id="screen_home">
 
-            <div class="row pb-3 pt-4" id="rewards">
-              <h1 class="text-center mb-0 text" id="earnings">0.000000000</h1>
-              <h6 class="text-center mt-0 text">Reward FREN <span class="welcome">(<span id="earningsth">0.00</span> TON)</span></h6>
-            </div>
+              <div class="row pb-3 pt-4" id="rewards">
+                <h1 class="text-center mb-0 text" id="earnings">0.000000000</h1>
+                <h6 class="text-center mt-0 text">Reward FREN <span class="welcome">(<span id="earningsth">0.00</span> TON)</span></h6>
+              </div>
+      
+              <div class="miner p-3 pb-4">
+                  <div class="row align-items-start row-1">
+                      <div class="col text-center">
+                          <div class="d-flex justify-content-center">
+                              <div id="wrapper" class="wrapper"></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row mt-0">
+                    <div class="col">
+                      <div><span class="text"><small>Mining Cycle</small></span></div>
+                      <div class="progress bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" id="progress-bar"></div>
+                        <div class="progress-text"><span id="progress-text"></span>&nbsp;<span id="cycle-end"></span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mt-0">
+                    <div class="col">
+                      <div><span class="text"><small>Miner Health</small></span></div>
+                      <div class="progress bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" id="health"></div>
+                        <div class="progress-text"><span id="health-text"></div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="mt-4 hidden" id="miningyes">
+                <p class="text mb-1"><small>
+                  <strong>Your Referral Link</strong><br>
+                  <span class="link-custom" onclick="app.copyLink();" id="refLink">t.me/FrenlyRobot?start</span><br>
+                  <span class="text2"><small><u>Each referred miner earns you 25% of their FREN.</u></small></span><br>
+                  <span class="text-success" id="refLinkSuccess" style="display: none;"><small><strong>Link successfully copied.</strong></small></span>
+                </small></p>
+                <p class="text mb-0"><small>
+                  <strong>Staked FREN</strong> (Frenly Energy)<br>
+                  <span class="text2" id="tmu">0.0</span>
+                </small></p>
+                <p class="text mb-0"><small>
+                  <strong>Health Boosts</strong><br>
+                  <span class="text2" id="health-boosts">No health boosts.</span>
+                </small></p>
+              </div>
+
+              <div id="miningno" class="hidden mt-4">
+                <p class="text small mb-0">To start mining, subscribe to <a href="https://t.me/FrenlyNews" target="_blank" class="link-custom"><strong>@FrenlyNews</strong></a> Telegram channel, return here and click the button bellow.</p>
+                <p class="text-danger mt-3 mb-0" id="mineError" style="font-size: small; display: none;"><strong>You still haven't subscribed to the channel.</strong></p>
+                <div class="mt-4 d-grid"><button type="button" class="btn btn-tg" onclick="app.startMining();">⚪️ <small><strong>Start Mining</strong></small></button></div>
+              </div>
+
+              <div id="miningnocycle" class="hidden mt-4">
+                <p class="text small mb-0">To restart mining, click the button on <a href="https://t.me/FrenlyNews/96" target="_blank" class="link-custom"><strong>Frenly News</strong></a> Telegram channel.</p>
+                <!-- <div class="mt-4 d-grid"><button type="button" class="btn btn-tg" onclick="app.startMining();">⚪️ <small><strong>Restart Mining</strong></small></button></div> -->
+              </div>
+
+              <p id="successMessage" class="text-success mt-1 mb-0 small" style="display: none;"><small><strong></strong></small></p>
+
+              <p id="errorMessage" class="text-danger mt-1 mb-0 small" style="display: none;"><small><strong></strong></small></p>
+
+              <p id="infoMessage" class="text-danger mt-1 mb-0 small" style="display: none;"><small><strong></strong></small></p>
     
-            <div class="miner p-3 pb-4">
-                <div class="row align-items-start row-1">
-                    <div class="col text-center">
-                        <div class="d-flex justify-content-center">
-                            <div id="wrapper" class="wrapper"></div>
-                        </div>
-                    </div>
+          </div>
+
+          <div id="screen_new" class="hidden section mt-4">
+            <div class="row p-3">
+              <div class="text-center my-3" id="paymentLoading" style="display: none;">
+                <img src="loading-circle.gif" alt="">
+              </div>
+              <div id="payment">
+                <div class="text-center my-3">
+                  <i class="fa-solid fa-circle-plus section-icon"></i>
                 </div>
-                <div class="row mt-0">
-                  <div class="col">
-                    <div><span class="text"><small>Mining Cycle</small></span></div>
-                    <div class="progress bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                      <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" id="progress-bar"></div>
-                      <div class="progress-text"><span id="progress-text"></span>&nbsp;<span id="cycle-end"></span></div>
-                    </div>
-                  </div>
+                <p class="text mb-2"><small><strong>Price</strong><br>
+                  <span class="text2"><span>0.250000000</span> TON</span></small></p>
+                <label for="addressWithdraw" class="form-label text"><small>Deposit Address</small></label>
+                <div class="input-group">
+                  <input type="text" id="addressDeposit" readonly class="form-control custom-form" placeholder="" aria-label="" aria-describedby="" value="">
+                  <button class="btn btn-tg" type="button" onclick="app.copyAddress();"><i class="fa-solid fa-copy"></i></button>
                 </div>
-                <div class="row mt-0">
-                  <div class="col">
-                    <div><span class="text"><small>Miner Health</small></span></div>
-                    <div class="progress bg-dark" role="progressbar" aria-label="Success example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                      <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" id="health"></div>
-                      <div class="progress-text"><span id="health-text"></div>
-                    </div>
-                  </div>
+                <p class="mt-3 mb-0" style="line-height: 0.9;"><span class="text2" style="font-size: small;"><small><u>Minimum deposit is 0.05 TON, everything less than that will be ignored by the app.</u></small></span></p>
+                <p class="text-success mt-3 mb-0" id="addressDepositSuccess" style="display: none; font-size: small;"><strong>Address successfully copied.</strong></p>
+                <p class="text-danger mt-3" id="depositError" style="font-size: small; display: none;"><strong>Payment still hasn't been detected, please try again in a minute.</strong></p>
+                <p class="text-success mt-3" id="depositSuccess" style="font-size: small; display: none;"><strong>Payment has been confirmed and FREN added on your balance.</strong></p>
+                <div class="d-grid mt-4">
+                  <button type="button" class="btn btn-tg" onclick="app.checkPayment();"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;Payment Confirmed</small></button>
                 </div>
+              </div>
             </div>
+          </div>
 
-            <div class="mt-4 hidden" id="miningyes">
-              <p class="text mb-1"><small>
-                <strong>Your Referral Link</strong><br>
-                <span class="link-custom" onclick="app.copyLink();" id="refLink">t.me/FrenlyRobot?start</span><br>
-                <span class="text2"><small><u>Each referred miner earns you 25% of their FREN.</u></small></span><br>
-                <span class="text-success" id="refLinkSuccess" style="display: none;"><small><strong>Link successfully copied.</strong></small></span>
-              </small></p>
-              <p class="text mb-0"><small>
-                <strong>Staked FREN</strong> (Frenly Energy)<br>
-                <span class="text2" id="tmu">0.0</span>
-              </small></p>
-              <p class="text mb-0"><small>
-                <strong>Health Boosts</strong><br>
-                <span class="text2" id="health-boosts">No health boosts.</span>
-              </small></p>
+          <div id="screen_settings" class="hidden section mt-4">
+            <div class="row p-3">
+              <div class="text-center my-3" id="settingsLoading" style="display: none;">
+                <img src="loading-circle.gif" alt="">
+              </div>
+              <div id="settings">
+                <div class="text-center my-3">
+                  <i class="fa-solid fa-gear section-icon"></i>
+                </div>
+                <div class="mb-3">
+                  <label for="addressWithdraw" class="form-label text"><small>Withdraw Address</small></label>
+                  <input type="text" class="form-control custom-form" id="addressWithdraw" placeholder="">
+                </div>
+                <p class="text-danger mt-3" id="addressError" style="font-size: small; display: none;"><strong>Save you withdrawal address to withdraw.</strong></p>
+                <p class="text-danger mt-3" id="settingsError" style="font-size: small; display: none;"><strong>Something went wrong or TON address is invalid.</strong></p>
+                <p class="text-success mt-3" id="settingsSuccess" style="font-size: small; display: none;"><strong>Withdraw address has been saved successfully.</strong></p>
+                <div class="d-grid">
+                  <button type="button" class="btn btn-tg" onclick="app.saveSettings();"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;Save</small></button>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <div id="miningno" class="hidden mt-4">
-              <p class="text small mb-0">To start mining, subscribe to <a href="https://t.me/FrenlyNews" target="_blank" class="link-custom"><strong>@FrenlyNews</strong></a> Telegram channel, return here and click the button bellow.</p>
-              <p class="text-danger mt-3 mb-0" id="mineError" style="font-size: small; display: none;"><strong>You still haven't subscribed to the channel.</strong></p>
-              <div class="mt-4 d-grid"><button type="button" class="btn btn-tg" onclick="app.startMining();">⚪️ <small><strong>Start Mining</strong></small></button></div>
+          <div id="screen_withdraw" class="hidden section mt-4">
+            <div class="row p-3">
+              <div class="text-center my-3" id="settingsLoading" style="display: none;">
+                <img src="loading-circle.gif" alt="">
+              </div>
+              <div>
+                <div class="text-center my-3">
+                  <i class="fa-solid fa-dollar-sign section-icon"></i>
+                </div>
+                <p class="text mb-0"><small>
+                  <strong>Rewards</strong> (FREN)<br>
+                  <span class="text2" id="earningsw">0.000000000</span>
+                </small></p>
+                <p class="text mb-0"><small>
+                  <strong>FREN Price</strong><br>
+                  <span class="text2" id="">0.100000000 TON</span>
+                </small></p>
+                <p class="text mb-0"><small></small>
+                  <strong>Rewards</strong> (TON)<br>
+                  <span class="text2" id="earningst">0.000000000</span>
+                </small></p>
+                <p class="mt-2 mb-0" style="line-height: 0.9;"><span class="text2" style="font-size: small;"><small><u>Withdrawal fee is 0.005 TON.</u></small></span></p>
+                <div class="d-grid mt-4">
+                  <button type="button" class="btn btn-tg" onclick="app.withdraw();"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;Withdraw Rewards</small></button>
+                </div>
+              </div>
             </div>
+          </div>
 
-            <div id="miningnocycle" class="hidden mt-4">
-              <p class="text small mb-0">To restart mining, click the button on <a href="https://t.me/FrenlyNews/96" target="_blank" class="link-custom"><strong>Frenly News</strong></a> Telegram channel.</p>
-              <!-- <div class="mt-4 d-grid"><button type="button" class="btn btn-tg" onclick="app.startMining();">⚪️ <small><strong>Restart Mining</strong></small></button></div> -->
-            </div>
-
-            <p id="successMessage" class="text-success mt-1 mb-0 small" style="display: none;"><small><strong></strong></small></p>
-
-            <p id="errorMessage" class="text-danger mt-1 mb-0 small" style="display: none;"><small><strong></strong></small></p>
-
-            <p id="infoMessage" class="text-danger mt-1 mb-0 small" style="display: none;"><small><strong></strong></small></p>
-  
-        </div>
-
-        <div id="screen_new" class="hidden section mt-4">
-          <div class="row p-3">
-            <div class="text-center my-3" id="paymentLoading" style="display: none;">
-              <img src="loading-circle.gif" alt="">
-            </div>
-            <div id="payment">
+          <div id="screen_faq" class="hidden section mt-4">
+            <div class="row p-3">
               <div class="text-center my-3">
-                <i class="fa-solid fa-circle-plus section-icon"></i>
+                <i class="fa-solid fa-circle-question section-icon"></i>
               </div>
-              <p class="text mb-2"><small><strong>Price</strong><br>
-                <span class="text2"><span>0.250000000</span> TON</span></small></p>
-              <label for="addressWithdraw" class="form-label text"><small>Deposit Address</small></label>
-              <div class="input-group">
-                <input type="text" id="addressDeposit" readonly class="form-control custom-form" placeholder="" aria-label="" aria-describedby="" value="">
-                <button class="btn btn-tg" type="button" onclick="app.copyAddress();"><i class="fa-solid fa-copy"></i></button>
-              </div>
-              <p class="mt-3 mb-0" style="line-height: 0.9;"><span class="text2" style="font-size: small;"><small><u>Minimum deposit is 0.05 TON, everything less than that will be ignored by the app.</u></small></span></p>
-              <p class="text-success mt-3 mb-0" id="addressDepositSuccess" style="display: none; font-size: small;"><strong>Address successfully copied.</strong></p>
-              <p class="text-danger mt-3" id="depositError" style="font-size: small; display: none;"><strong>Payment still hasn't been detected, please try again in a minute.</strong></p>
-              <p class="text-success mt-3" id="depositSuccess" style="font-size: small; display: none;"><strong>Payment has been confirmed and FREN added on your balance.</strong></p>
-              <div class="d-grid mt-4">
-                <button type="button" class="btn btn-tg" onclick="app.checkPayment();"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;Payment Confirmed</small></button>
-              </div>
+              <p class="text"><small>
+                <strong>Where is new TON coming from?</strong><br>
+                <span class="text2">We earn new TON by selling ads on our channel, by having native Telegram ads, by selling premium accounts of the app, by selling ads on our other social network accounts, having a lottery etc.</span>
+              </small></p>
+              <p class="text"><small>
+                <strong>Will there be a token?</strong><br>
+                <span class="text2">Yes, we will have our own token called Frenly Coin with ticker FRCO..</span>
+              </small></p>
             </div>
           </div>
-        </div>
 
-        <div id="screen_settings" class="hidden section mt-4">
-          <div class="row p-3">
-            <div class="text-center my-3" id="settingsLoading" style="display: none;">
-              <img src="loading-circle.gif" alt="">
-            </div>
-            <div id="settings">
+          <div id="screen_about" class="hidden section my-4">
+            <div class="row p-3 pb-0">
               <div class="text-center my-3">
-                <i class="fa-solid fa-gear section-icon"></i>
-              </div>
-              <div class="mb-3">
-                <label for="addressWithdraw" class="form-label text"><small>Withdraw Address</small></label>
-                <input type="text" class="form-control custom-form" id="addressWithdraw" placeholder="">
-              </div>
-              <p class="text-danger mt-3" id="addressError" style="font-size: small; display: none;"><strong>Save you withdrawal address to withdraw.</strong></p>
-              <p class="text-danger mt-3" id="settingsError" style="font-size: small; display: none;"><strong>Something went wrong or TON address is invalid.</strong></p>
-              <p class="text-success mt-3" id="settingsSuccess" style="font-size: small; display: none;"><strong>Withdraw address has been saved successfully.</strong></p>
-              <div class="d-grid">
-                <button type="button" class="btn btn-tg" onclick="app.saveSettings();"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;Save</small></button>
+                  <img src="./favicon.png?v=2" alt="" class="icon-menu ms-2">
               </div>
             </div>
-          </div>
-      </div>
+            <div class="row p-3 pt-2">
+              <p class="text"><small>
+                <strong>About Frenly App And Frenly Coin</strong><br>
+              </small></p>
 
-      <div id="screen_withdraw" class="hidden section mt-4">
-        <div class="row p-3">
-          <div class="text-center my-3" id="settingsLoading" style="display: none;">
-            <img src="loading-circle.gif" alt="">
-          </div>
-          <div>
-            <div class="text-center my-3">
-              <i class="fa-solid fa-dollar-sign section-icon"></i>
-            </div>
-            <p class="text mb-0"><small>
-              <strong>Rewards</strong> (FREN)<br>
-              <span class="text2" id="earningsw">0.000000000</span>
-            </small></p>
-            <p class="text mb-0"><small>
-              <strong>FREN Price</strong><br>
-              <span class="text2" id="">0.100000000 TON</span>
-            </small></p>
-            <p class="text mb-0"><small></small>
-              <strong>Rewards</strong> (TON)<br>
-              <span class="text2" id="earningst">0.000000000</span>
-            </small></p>
-            <p class="mt-2 mb-0" style="line-height: 0.9;"><span class="text2" style="font-size: small;"><small><u>Withdrawal fee is 0.005 TON.</u></small></span></p>
-            <div class="d-grid mt-4">
-              <button type="button" class="btn btn-tg" onclick="app.withdraw();"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;Withdraw Rewards</small></button>
-            </div>
-          </div>
-        </div>
-      </div>
+              <p class="text"><small>
+                <span class="text2">Frenly App (@FrenlyRobot) is a TON mining game that sells ads on its channel and distributes earnings to its users to keep TON users informed and engaged and reward them for it.</span>
+              </small></p>
+              <p class="text"><small>
+                <span class="text2">It creates new TON by many different means:</span>
+              </small></p>
+              <ul style="list-style-type: none;">
+                <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;selling premium accounts</small></li>
+                <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;selling native Telegram ads on the channel</small></li>
+                <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;selling ads on the channel directly</small></li>
+                <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;selling ads on our other social networks</small></li>
+                <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;lottery</small></li>
+                <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;TON staking</small></li>
+                <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;selling other perks in the app</small></li>
+              </ul>
+              <p class="text"><small>
+                <span class="text2">Each user receives 0.01 FREN (Frenly Energy) for free and to start mining, he has to subscribe to @FrenlyNews channel, channel for publishing ads and news about TON ecosystem and projects in it.</span>
+              </small></p>
 
-      <div id="screen_faq" class="hidden section mt-4">
-        <div class="row p-3">
-          <div class="text-center my-3">
-            <i class="fa-solid fa-circle-question section-icon"></i>
-          </div>
-          <p class="text"><small>
-            <strong>Where is new TON coming from?</strong><br>
-            <span class="text2">We earn new TON by selling ads on our channel, by having native Telegram ads, by selling premium accounts of the app, by selling ads on our other social network accounts, having a lottery etc.</span>
-          </small></p>
-          <p class="text"><small>
-            <strong>Will there be a token?</strong><br>
-            <span class="text2">Yes, we will have our own token called Frenly Coin with ticker FRCO..</span>
-          </small></p>
-        </div>
-      </div>
+              <p class="text"><small>
+                <span class="text2">Users mine FREN and they can either withdraw their rewards any time they want or compound them to increase their earnings. Users can also mint new FREN by using TON. When withdrawing, FREN is automatically converted to TON.</span>
+              </small></p>
 
-      <div id="screen_about" class="hidden section my-4">
-        <div class="row p-3 pb-0">
-          <div class="text-center my-3">
-              <img src="./favicon.png?v=2" alt="" class="icon-menu ms-2">
-          </div>
-        </div>
-        <div class="row p-3 pt-2">
-          <p class="text"><small>
-            <strong>About Frenly App And Frenly Coin</strong><br>
-          </small></p>
+              <p class="text"><small>
+                <span class="text2">In last phase, FRCO (Frenly Coin) will become a token on TON network.</span>
+              </small></p>
 
-          <p class="text"><small>
-            <span class="text2">Frenly App (@FrenlyRobot) is a TON mining game that sells ads on its channel and distributes earnings to its users to keep TON users informed and engaged and reward them for it.</span>
-          </small></p>
-          <p class="text"><small>
-            <span class="text2">It creates new TON by many different means:</span>
-          </small></p>
-          <ul style="list-style-type: none;">
-            <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;selling premium accounts</small></li>
-            <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;selling native Telegram ads on the channel</small></li>
-            <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;selling ads on the channel directly</small></li>
-            <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;selling ads on our other social networks</small></li>
-            <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;lottery</small></li>
-            <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;TON staking</small></li>
-            <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;selling other perks in the app</small></li>
-          </ul>
-          <p class="text"><small>
-            <span class="text2">Each user receives 0.01 FREN (Frenly Energy) for free and to start mining, he has to subscribe to @FrenlyNews channel, channel for publishing ads and news about TON ecosystem and projects in it.</span>
-          </small></p>
+              <p class="text"><small>
+                <strong>Milestones</strong><br>
+              </small></p>
 
-          <p class="text"><small>
-            <span class="text2">Users mine FREN and they can either withdraw their rewards any time they want or compound them to increase their earnings. Users can also mint new FREN by using TON. When withdrawing, FREN is automatically converted to TON.</span>
-          </small></p>
+              <p class="text"><small>
+                <span class="text2">Phase 0. Starting phase in which we develop basic Telegram mini app with a referral system, basic mining, withdrawal, channel subscription check and other basic MVP (Minimum Viable Product) functionality. Price of minting FREN in this phase is 0.1 TON.</span>
+              </small></p>
 
-          <p class="text"><small>
-            <span class="text2">In last phase, FRCO (Frenly Coin) will become a token on TON network.</span>
-          </small></p>
+              <p class="text"><small>
+                <span class="text2">Phase 0.5. This assumes finished phase 0 and start of subtle advertising. Price of minting FREN in this phase is 0.25 TON.</span>
+              </small></p>
 
-          <p class="text"><small>
-            <strong>Milestones</strong><br>
-          </small></p>
+              <p class="text"><small>
+                <span class="text2">Phase 1. Develop features for daily mining cycle to incentivize users for bigger engagement on the channel, to stay informed and interested in TON ecosystem. Price of minting FREN in this phase is 0.5 TON.</span>
+              </small></p>
 
-          <p class="text"><small>
-            <span class="text2">Phase 0. Starting phase in which we develop basic Telegram mini app with a referral system, basic mining, withdrawal, channel subscription check and other basic MVP (Minimum Viable Product) functionality. Price of minting FREN in this phase is 0.1 TON.</span>
-          </small></p>
+              <p class="text"><small>
+                <span class="text2">Phase 1.5. Finished phase 1 and start advertising more seriously. Price of minting FREN in this phase is 1 TON.</span>
+              </small></p>
 
-          <p class="text"><small>
-            <span class="text2">Phase 0.5. This assumes finished phase 0 and start of subtle advertising. Price of minting FREN in this phase is 0.25 TON.</span>
-          </small></p>
+              <p class="text"><small>
+                <span class="text2">Phase 2. We expand our advertising network from just Telegram to X, Facebook and possibly other to increase earnings for the network by selling ads on those social networks too. Price of minting FREN in this phase is 1 TON.</span>
+              </small></p>
 
-          <p class="text"><small>
-            <span class="text2">Phase 1. Develop features for daily mining cycle to incentivize users for bigger engagement on the channel, to stay informed and interested in TON ecosystem. Price of minting FREN in this phase is 0.5 TON.</span>
-          </small></p>
-
-          <p class="text"><small>
-            <span class="text2">Phase 1.5. Finished phase 1 and start advertising more seriously. Price of minting FREN in this phase is 1 TON.</span>
-          </small></p>
-
-          <p class="text"><small>
-            <span class="text2">Phase 2. We expand our advertising network from just Telegram to X, Facebook and possibly other to increase earnings for the network by selling ads on those social networks too. Price of minting FREN in this phase is 1 TON.</span>
-          </small></p>
-
-          <p class="text"><small>
-            <span class="text2">Phase 3. Build the Frenly Coin token on TON network. Price of minting FREN in this phase is 1 TON.</span>
-          </small></p>
-        </div>
-      </div>
-
-        <div id="screen_menu" class="hidden section mt-4">
-          <div class="row p-3">
-            <div class="text-center my-3">
-                <img src="./favicon.png?v=2" alt="" class="icon-menu ms-2">
+              <p class="text"><small>
+                <span class="text2">Phase 3. Build the Frenly Coin token on TON network. Price of minting FREN in this phase is 1 TON.</span>
+              </small></p>
             </div>
           </div>
-          <div class="row p-3">
-            <p class="ms-3"> <a href="#" class="link-custom" onclick="app.showWithdraw();"><strong>Withdraw</strong></a> </p>
-            <p class="ms-3"> <a href="javascript:void(0);" onclick="app.openScreen('about');" class="link-custom"><strong>About</strong></a> </p>
-            <p class="ms-3"> <a href="javascript:void(0);" onclick="app.openScreen('faq');" class="link-custom"><strong>FAQ</strong></a> </p>
-            <p class="ms-3"> <a href="https://t.me/FrenlyCoin" class="link-custom" target="_blank"><strong>Contact</strong></a> </p>
-            <p class="ms-3"> <a href="javascript:void(0);" onclick="app.openScreen('settings');" class="link-custom"><strong>Settings</strong></a> </p>
+
+          <div id="screen_menu" class="hidden section mt-4">
+            <div class="row p-3">
+              <div class="text-center my-3">
+                  <img src="./favicon.png?v=2" alt="" class="icon-menu ms-2">
+              </div>
+            </div>
+            <div class="row p-3">
+              <p class="ms-3"> <a href="#" class="link-custom" onclick="app.showWithdraw();"><strong>Withdraw</strong></a> </p>
+              <p class="ms-3"> <a href="javascript:void(0);" onclick="app.openScreen('about');" class="link-custom"><strong>About</strong></a> </p>
+              <p class="ms-3"> <a href="javascript:void(0);" onclick="app.openScreen('faq');" class="link-custom"><strong>FAQ</strong></a> </p>
+              <p class="ms-3"> <a href="https://t.me/FrenlyCoin" class="link-custom" target="_blank"><strong>Contact</strong></a> </p>
+              <p class="ms-3"> <a href="javascript:void(0);" onclick="app.openScreen('settings');" class="link-custom"><strong>Settings</strong></a> </p>
+            </div>
           </div>
         </div>
-
       </div>
     </main>
 
@@ -291,7 +292,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="./anime.min.js"></script>
-    <script src="./index.js?157"></script>
+    <script src="./index.js?158"></script>
 
   </body>
 </html>
