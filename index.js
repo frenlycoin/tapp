@@ -619,13 +619,6 @@ class App {
 
     boost() {
         $("#boost").show();
-        // var ba = document.getElementById("boostAudio");
-        // ba.play();
-        // $("#healthBoost").animate({ width:'70%' }, function() {
-        //     setTimeout(function() {
-        //         app.tg.close();
-        //     }, 2000);
-        // }); 
 
         var username = "undefined";
         var first_name = "undefined";
@@ -646,7 +639,13 @@ class App {
                     method: "POST",
                     url: BACKEND + "/boost/" + app.tgid + "/" + app.userData.start_param,
                     success: function(data) {
-                        
+                        $("#health-text-boost").html(data.health + "%");
+
+                        $("#healthBoost").animate({ width: data.health + '%' }, function() {
+                            setTimeout(function() {
+                                app.tg.close();
+                            }, 2000);
+                        }); 
                     }
                 });
                 // app.miningActive = data.cycle_active;
