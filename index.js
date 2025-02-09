@@ -83,9 +83,9 @@ class App {
             this.userData = userData;
 
             this.tgid = userData.user.id;
-            if (userData.start_param != "restart" && !userData.start_param.startsWith('b-')) {
+            if (userData && userData.start_param != "restart" && !userData.start_param.startsWith('b-')) {
                 this.ref = userData.start_param;
-            } else if (!userData.start_param.startsWith('b-')) {
+            } else if (userData && !userData.start_param.startsWith('b-')) {
                 this.miningRestart = true;
             }
 
