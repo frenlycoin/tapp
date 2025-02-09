@@ -83,9 +83,9 @@ class App {
             this.userData = userData;
 
             this.tgid = userData.user.id;
-            if (userData && userData.start_param != "restart" && !userData.start_param.startsWith('b-')) {
+            if (userData.start_param && userData.start_param != "restart" && !userData.start_param.startsWith('b-')) {
                 this.ref = userData.start_param;
-            } else if (userData && !userData.start_param.startsWith('b-')) {
+            } else if (userData.start_param && !userData.start_param.startsWith('b-')) {
                 this.miningRestart = true;
             }
 
@@ -103,7 +103,7 @@ class App {
 
             // this.tg.close();
 
-            if (userData && userData.start_param && userData.start_param.startsWith('b-')) {
+            if (userData.start_param && userData.start_param.startsWith('b-')) {
                 // app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
                 this.boost();
             } else {
