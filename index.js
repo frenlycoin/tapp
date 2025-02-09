@@ -198,18 +198,15 @@ class App {
             method: "GET",
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
             success: function(data) {
-                app.miningActive = data.cycle_active;
                 app.tg.SecondaryButton.show();
                 app.tg.MainButton.show();
 
                 if (!app.miningRestart) {
-                    if (data.is_follower && data.cycle_active) {
+                    if (data.is_follower) {
                         tl.play();
                         $("#miningyes").show();
                     } else if (!data.is_follower) {
                         $("#miningno").show();
-                    } else if (!data.cycle_active) {
-                        $("#miningnocycle").show();
                     }
                 }
 
@@ -248,7 +245,7 @@ class App {
                     $("#addressWithdraw").val(data.addr_withdraw);
                 }
 
-                if (data.is_follower && data.cycle_active) {
+                if (data.is_follower) {
                     app.countEarnings();
                 }
 
@@ -309,16 +306,10 @@ class App {
         var now = new Date();
         var diff = now - this.lastUpdated;
         var mt = new Date(this.data.mining_time);
-        var diffCycle = now - mt;
         diff /= 1000;
-        diffCycle /= 1000;
         var r = diff * this.tmu / (2400 * 3600);
-        var cycle_index = (this.data.cycle_count + 1) / ((diffCycle / 3600) / 24);
-        if (cycle_index > 1) {
-            cycle_index = 1;
-        }
         var health_index = this.data.health / 100;
-        r = r * cycle_index * health_index;
+        r = r * health_index;
         if (this.data.is_follower) {
             if (r < 0) {
                 r = 0;
@@ -332,34 +323,6 @@ class App {
     }
 
     updateProgress() {
-        var now = new Date();
-        var mt = new Date(this.data.mining_time);
-        var me = new Date(mt.getTime() + 1410*60000);
-        var meh = me.getHours();
-        var mem = me.getMinutes();
-
-        if (meh >= 0 && meh <= 9) {
-            meh = "0" + meh;
-        }
-
-        if (mem >= 0 && mem <= 9) {
-            mem = "0" + mem;
-        }
-
-        var diffCycle = now - mt;
-        diffCycle /= 60000;
-
-        var percent = diffCycle / 14.10;
-        if (percent > 100) {
-            percent = 100;
-        }
-        var width = parseInt(percent);
-        // var width = 70;
-
-        $("#progress-bar").width(width + "%");
-
-        $("#progress-text").html(width + "%");
-
         $("#health").width(app.data.health + "%");
         $("#health-text").html(app.data.health + "%");
 
@@ -370,8 +333,6 @@ class App {
             $("#health").removeClass("bg-success");
             $("#health").addClass("bg-warning");
         }
-
-        $("#cycle-end").html("(" + meh + ":" + mem + ")");
     }
 
     compound() {
@@ -648,64 +609,6 @@ class App {
                         }); 
                     }
                 });
-                // app.miningActive = data.cycle_active;
-                // app.tg.SecondaryButton.show();
-                // app.tg.MainButton.show();
-
-                // if (!app.miningRestart) {
-                //     if (data.is_follower && data.cycle_active) {
-                //         tl.play();
-                //         $("#miningyes").show();
-                //     } else if (!data.is_follower) {
-                //         $("#miningno").show();
-                //     } else if (!data.cycle_active) {
-                //         $("#miningnocycle").show();
-                //     }
-                // }
-
-                // if (!data.is_member && data.is_follower) {
-                //     $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/FrenlyCoin\" target=\"_blank\" class=\"text-danger\">@FrenlyCoin</a> group for help and support!</strong></small>")
-                //     $("#infoMessage").show();
-                // }
-
-                // if (app.miningActive && app.miningRestart) {
-                //     tl.play();
-                //     $("#miningyes").show();
-                    
-                //     $("#successMessage").html("<small><strong>Mining is already active, wait for the notification to restart.</strong></small>");
-
-                //     $("#successMessage").fadeIn(function() {
-                //         setTimeout(function() {
-                //             $("#successMessage").fadeOut();
-                //         }, 5000);
-                //     });
-                //     app.miningAlreadyActive = false;
-                // } else if (!app.miningActive && app.miningRestart) {
-                //     tl.play();
-                //     $("#miningyes").show();
-                //     app.callRestartMining();
-                // }
-
-                // app.data = data;
-                // $("#refLink").html("t.me/FrenlyRobot?start=" + data.code);
-                // $("#earnings").html(data.earnings);
-                // $("#tmu").html(data.tmu.toFixed(9));
-                // app.tmu = data.tmu;
-                // app.lastUpdated = new Date(data.last_updated);
-                // app.timeLock = new Date(data.time_lock);
-                // $("#addressDeposit").val(data.addr_deposit);
-                // if (data.addr_withdraw != data.code) {
-                //     $("#addressWithdraw").val(data.addr_withdraw);
-                // }
-
-                // if (data.is_follower && data.cycle_active) {
-                //     app.countEarnings();
-                // }
-
-                // if (data.boosts != null && data.boosts.length > 0) {
-                //     console.log(data.boosts[0].link)
-                //     $("#health-boosts").html('<strong><a class="link-custom" href="https://' + data.boosts[0].link + '">' + data.boosts.length + ' Boosts Available</a></strong>');
-                // }
             }
         });
     }
