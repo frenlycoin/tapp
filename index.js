@@ -618,7 +618,7 @@ class App {
     }
 
     boost() {
-        // $("#boost").show();
+        $("#boost").show();
         // var ba = document.getElementById("boostAudio");
         // ba.play();
         // $("#healthBoost").animate({ width:'70%' }, function() {
@@ -639,6 +639,9 @@ class App {
             method: "GET",
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
             success: function(data) {
+                $("#healthBoost").width(data.health + "%");
+                $("#health-text-boost").html(data.health + "%");
+
                 $.ajax({
                     method: "POST",
                     url: BACKEND + "/boost/" + app.tgid + "/" + app.userData.start_param,
