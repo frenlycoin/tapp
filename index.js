@@ -618,14 +618,87 @@ class App {
     }
 
     boost() {
-        $("#boost").show();
+        // $("#boost").show();
         // var ba = document.getElementById("boostAudio");
         // ba.play();
-        $("#healthBoost").animate({ width:'70%' }, function() {
-            setTimeout(function() {
-                app.tg.close();
-            }, 2000);
-        }); 
+        // $("#healthBoost").animate({ width:'70%' }, function() {
+        //     setTimeout(function() {
+        //         app.tg.close();
+        //     }, 2000);
+        // }); 
+
+        var username = "undefined";
+        var first_name = "undefined";
+        if (this.userData) {
+            username = this.userData.user.username;
+            first_name = this.userData.user.first_name;
+        }
+        var ts = new Date().getTime();
+        $.ajax({
+            method: "GET",
+            url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
+            success: function(data) {
+                console.log(data);
+                // app.miningActive = data.cycle_active;
+                // app.tg.SecondaryButton.show();
+                // app.tg.MainButton.show();
+
+                // if (!app.miningRestart) {
+                //     if (data.is_follower && data.cycle_active) {
+                //         tl.play();
+                //         $("#miningyes").show();
+                //     } else if (!data.is_follower) {
+                //         $("#miningno").show();
+                //     } else if (!data.cycle_active) {
+                //         $("#miningnocycle").show();
+                //     }
+                // }
+
+                // if (!data.is_member && data.is_follower) {
+                //     $("#infoMessage").html("<small><strong>Join <a href=\"https://t.me/FrenlyCoin\" target=\"_blank\" class=\"text-danger\">@FrenlyCoin</a> group for help and support!</strong></small>")
+                //     $("#infoMessage").show();
+                // }
+
+                // if (app.miningActive && app.miningRestart) {
+                //     tl.play();
+                //     $("#miningyes").show();
+                    
+                //     $("#successMessage").html("<small><strong>Mining is already active, wait for the notification to restart.</strong></small>");
+
+                //     $("#successMessage").fadeIn(function() {
+                //         setTimeout(function() {
+                //             $("#successMessage").fadeOut();
+                //         }, 5000);
+                //     });
+                //     app.miningAlreadyActive = false;
+                // } else if (!app.miningActive && app.miningRestart) {
+                //     tl.play();
+                //     $("#miningyes").show();
+                //     app.callRestartMining();
+                // }
+
+                // app.data = data;
+                // $("#refLink").html("t.me/FrenlyRobot?start=" + data.code);
+                // $("#earnings").html(data.earnings);
+                // $("#tmu").html(data.tmu.toFixed(9));
+                // app.tmu = data.tmu;
+                // app.lastUpdated = new Date(data.last_updated);
+                // app.timeLock = new Date(data.time_lock);
+                // $("#addressDeposit").val(data.addr_deposit);
+                // if (data.addr_withdraw != data.code) {
+                //     $("#addressWithdraw").val(data.addr_withdraw);
+                // }
+
+                // if (data.is_follower && data.cycle_active) {
+                //     app.countEarnings();
+                // }
+
+                // if (data.boosts != null && data.boosts.length > 0) {
+                //     console.log(data.boosts[0].link)
+                //     $("#health-boosts").html('<strong><a class="link-custom" href="https://' + data.boosts[0].link + '">' + data.boosts.length + ' Boosts Available</a></strong>');
+                // }
+            }
+        });
     }
 
 }
