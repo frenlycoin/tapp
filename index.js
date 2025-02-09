@@ -634,11 +634,18 @@ class App {
             first_name = this.userData.user.first_name;
         }
         var ts = new Date().getTime();
+
         $.ajax({
             method: "GET",
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
             success: function(data) {
-                console.log(data);
+                $.ajax({
+                    method: "POST",
+                    url: BACKEND + "/boost/" + app.tgid + "/" + app.userData.start_param,
+                    success: function(data) {
+                        
+                    }
+                });
                 // app.miningActive = data.cycle_active;
                 // app.tg.SecondaryButton.show();
                 // app.tg.MainButton.show();
