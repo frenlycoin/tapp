@@ -598,7 +598,7 @@ class App {
 
                 $.ajax({
                     method: "POST",
-                    url: BACKEND + "/boost/" + app.tgid + "/" + app.userData.start_param,
+                    url: BACKEND + "/boost/" + app.tgid + "/" + app.userData.start_param + "?ts=" + ts,
                     success: function(data) {
                         $("#health-text-boost").html(data.health + "%");
 
