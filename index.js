@@ -3,7 +3,7 @@ $( document ).ready(function() {
     window["app"] = app;
 });
 
-const BACKEND = "https://calcanean-semicircularly-addie.ngrok-free.dev/"
+const BACKEND = "https://a432-86-33-70-175.ngrok-free.app"
 
 class App {
 
