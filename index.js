@@ -196,6 +196,7 @@ class App {
         var ts = new Date().getTime();
         $.ajax({
             method: "GET",
+            crossDomain: true,
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
             success: function(data) {
                 app.tg.SecondaryButton.show();
@@ -341,6 +342,7 @@ class App {
 
         $.ajax({
             method: "POST",
+            crossDomain: true,
             url: BACKEND + "/compound/" + app.tgid,
             success: function(data) {
                 clearTimeout(app.tmout);
@@ -368,6 +370,7 @@ class App {
             $("#paymentLoading").fadeIn();
             $.ajax({
                 method: "GET",
+
                 url: BACKEND + "/paid/" + app.tgid,
                 success: function(data) {
                     $("#paymentLoading").fadeOut(function() {
@@ -406,6 +409,7 @@ class App {
         var ts = new Date().getTime();
         $.ajax({
             method: "GET",
+            crossDomain: true,
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + this.userData.user.username + "/" + this.userData.user.first_name + "?ts=" + ts,
             success: function(data) {
                 if (data.is_follower) {
@@ -431,6 +435,7 @@ class App {
             $("#settingsLoading").fadeIn();
             $.ajax({
                 method: "POST",
+                crossDomain: true,
                 url: BACKEND + "/save/" + app.tgid,
                 data: {
                     address_withdraw: av,
@@ -591,6 +596,7 @@ class App {
 
         $.ajax({
             method: "GET",
+            crossDomain: true,
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
             success: function(data) {
                 $("#healthBoost").width(data.health + "%");
@@ -598,6 +604,7 @@ class App {
 
                 $.ajax({
                     method: "POST",
+                    crossDomain: true,
                     url: BACKEND + "/boost/" + app.tgid + "/" + app.userData.start_param + "?ts=" + ts,
                     success: function(data) {
                         $("#health-text-boost").html(data.health + "%");
