@@ -3,7 +3,7 @@ $( document ).ready(function() {
     window["app"] = app;
 });
 
-const BACKEND = "https://2055-86-33-70-175.ngrok-free.app"
+const BACKEND = "https://frenlytbot.aintchain.com/"
 
 class App {
 
