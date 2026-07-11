@@ -3,7 +3,7 @@ $( document ).ready(function() {
     window["app"] = app;
 });
 
-const BACKEND = "https://tbot.frenlycoin.com"
+const BACKEND = "https://calcanean-semicircularly-addie.ngrok-free.dev/"
 
 class App {
 
