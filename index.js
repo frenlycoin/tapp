@@ -599,10 +599,10 @@ class App {
             crossDomain: true,
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
             success: function(data) {
-                $("#healthBoost").width(data.health + "%");
+                // $("#healthBoost").width(data.health + "%");
                 $("#health-text-boost").html(data.health + "%");
 
-                $("#healthBoost").animate({ width: data.health + '%' }, function() {
+                $("#healthBoost").animate({ width: '100%' }, function() {
                             setTimeout(function() {
                                 app.tg.close();
                             }, 2000);
