@@ -602,20 +602,25 @@ class App {
                 $("#healthBoost").width(data.health + "%");
                 $("#health-text-boost").html(data.health + "%");
 
-                $.ajax({
-                    method: "POST",
-                    crossDomain: true,
-                    url: BACKEND + "/boost/" + app.tgid + "/" + app.userData.start_param + "?ts=" + ts,
-                    success: function(data) {
-                        $("#health-text-boost").html(data.health + "%");
-
-                        $("#healthBoost").animate({ width: data.health + '%' }, function() {
+                $("#healthBoost").animate({ width: data.health + '%' }, function() {
                             setTimeout(function() {
                                 app.tg.close();
                             }, 2000);
-                        }); 
-                    }
-                });
+                        });
+                // $.ajax({
+                //     method: "POST",
+                //     crossDomain: true,
+                //     url: BACKEND + "/boost/" + app.tgid + "/" + app.userData.start_param + "?ts=" + ts,
+                //     success: function(data) {
+                //         $("#health-text-boost").html(data.health + "%");
+
+                //         $("#healthBoost").animate({ width: data.health + '%' }, function() {
+                //             setTimeout(function() {
+                //                 app.tg.close();
+                //             }, 2000);
+                //         });
+                //     }
+                // });
             }
         });
     }
