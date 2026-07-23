@@ -18,6 +18,7 @@ class App {
     timeLock;
     tmout;
     data;
+    price;
     ref;
     menuActive;
     theme;
@@ -25,7 +26,6 @@ class App {
     miningActive;
     miningRestart;
     viewportHeight;
-    start;
 
     constructor() {
         this.simulationRunning = false;
@@ -107,18 +107,11 @@ class App {
                 // app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
                 this.boost();
             } else {
-                this.loadData();
+            this.loadData();
                 $("#main").show();
             }
 
             Telegram.WebApp.onEvent("activated", function() {
-                // if (app && app.userData.start_param.startsWith('b-')) {
-                //     // alert(app.userData.start_param);
-                //     // app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
-                //     app.tg.close();
-                // } else {
-                    
-                // }
                 location.reload();
             });
         } catch (e) {
@@ -186,6 +179,39 @@ class App {
         }
     }
 
+    normalizePrice(price) {
+        return Number(price || 0) / 1000000000;
+    }
+
+    formatPrice(price) {
+        return Number(price || 0).toFixed(9);
+    }
+
+    formatNumber(num) {
+        const parts = num.toString().split('.');
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        return parts.join('.');
+    }
+
+    updatePriceDisplay() {
+        const price = this.normalizePrice(this.price);
+        const priceText = this.formatPrice(price);
+        if (document.getElementById("newPriceValue")) {
+            $("#newPriceValue").html(priceText);
+        }
+        if (document.getElementById("withdrawPriceValue")) {
+            $("#withdrawPriceValue").html(priceText + " TON");
+        }
+        const rewards = app.getRewards();
+        if (document.getElementById("earningsth")) {
+            $("#earningsth").html(this.formatNumber((rewards * price).toFixed(9)));
+        }
+        // const withdrawRewards = parseFloat($("#earningsw").text()) || 0;
+        if (document.getElementById("earningst")) {
+            $("#earningst").html(this.formatNumber((rewards * price).toFixed(9)));
+        }
+    }
+
     loadData() {
         var username = "undefined";
         var first_name = "undefined";
@@ -196,18 +222,24 @@ class App {
         var ts = new Date().getTime();
         $.ajax({
             method: "GET",
-            crossDomain: true,
+            headers: {
+                "ngrok-skip-browser-warning": "true"
+            },
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
             success: function(data) {
+                app.price = data.price;
+                app.miningActive = data.cycle_active;
                 app.tg.SecondaryButton.show();
                 app.tg.MainButton.show();
 
                 if (!app.miningRestart) {
-                    if (data.is_follower) {
+                    if (data.is_follower && data.cycle_active) {
                         tl.play();
                         $("#miningyes").show();
                     } else if (!data.is_follower) {
                         $("#miningno").show();
+                    } else if (!data.cycle_active) {
+                        $("#miningnocycle").show();
                     }
                 }
 
@@ -236,17 +268,18 @@ class App {
 
                 app.data = data;
                 $("#refLink").html("t.me/FrenlyRobot?start=" + data.code);
-                $("#earnings").html(data.earnings);
-                $("#tmu").html(data.tmu.toFixed(9));
+                $("#earnings").html(app.formatNumber(data.earnings));
+                $("#tmu").html(app.formatNumber(data.tmu.toFixed(9)));
                 app.tmu = data.tmu;
                 app.lastUpdated = new Date(data.last_updated);
+                app.updatePriceDisplay();
                 app.timeLock = new Date(data.time_lock);
                 $("#addressDeposit").val(data.addr_deposit);
                 if (data.addr_withdraw != data.code) {
                     $("#addressWithdraw").val(data.addr_withdraw);
                 }
 
-                if (data.is_follower) {
+                if (data.is_follower && data.cycle_active) {
                     app.countEarnings();
                 }
 
@@ -295,10 +328,8 @@ class App {
         app.loadWithdrawStats();
         var earnings = app.getRewards();
         app.updateProgress();
-        $("#earnings").html(earnings);
-        
-        var r = app.getRewards();
-        $("#earningsth").html((earnings / 10).toFixed(9));
+        $("#earnings").html(app.formatNumber(earnings));
+        app.updatePriceDisplay();
 
         app.tmout = setTimeout(app.countEarnings, 1000);
     }
@@ -306,11 +337,19 @@ class App {
     getRewards() {
         var now = new Date();
         var diff = now - this.lastUpdated;
-        var mt = new Date(this.data.mining_time);
+        var mt = new Date(this.data.last_updated);
+        var diffCycle = now - mt;
         diff /= 1000;
+        diffCycle /= 1000;
         var r = diff * this.tmu / (2400 * 3600);
+        var cycle_index = (this.data.cycle_count + 1) / ((diffCycle / 3600) / 24);
+        if (cycle_index > 1) {
+            cycle_index = 1;
+        } else if (cycle_index < 0.01) {
+            cycle_index = 0.01;
+        }
         var health_index = this.data.health / 100;
-        r = r * health_index;
+        r = r * cycle_index * health_index;
         if (this.data.is_follower) {
             if (r < 0) {
                 r = 0;
@@ -324,6 +363,34 @@ class App {
     }
 
     updateProgress() {
+        var now = new Date();
+        var mt = new Date(this.data.mining_time);
+        var me = new Date(mt.getTime() + 1410*60000);
+        var meh = me.getHours();
+        var mem = me.getMinutes();
+
+        if (meh >= 0 && meh <= 9) {
+            meh = "0" + meh;
+        }
+
+        if (mem >= 0 && mem <= 9) {
+            mem = "0" + mem;
+        }
+
+        var diffCycle = now - mt;
+        diffCycle /= 60000;
+
+        var percent = diffCycle / 14.10;
+        if (percent > 100) {
+            percent = 100;
+        }
+        var width = parseInt(percent);
+        // var width = 70;
+
+        $("#progress-bar").width(width + "%");
+
+        $("#progress-text").html(width + "%");
+
         $("#health").width(app.data.health + "%");
         $("#health-text").html(app.data.health + "%");
 
@@ -334,6 +401,8 @@ class App {
             $("#health").removeClass("bg-success");
             $("#health").addClass("bg-warning");
         }
+
+        $("#cycle-end").html("(" + meh + ":" + mem + ")");
     }
 
     compound() {
@@ -342,7 +411,9 @@ class App {
 
         $.ajax({
             method: "POST",
-            crossDomain: true,
+            headers: {
+                "ngrok-skip-browser-warning": "true"
+            },
             url: BACKEND + "/compound/" + app.tgid,
             success: function(data) {
                 clearTimeout(app.tmout);
@@ -370,7 +441,9 @@ class App {
             $("#paymentLoading").fadeIn();
             $.ajax({
                 method: "GET",
-
+                headers: {
+                    "ngrok-skip-browser-warning": "true"
+                },
                 url: BACKEND + "/paid/" + app.tgid,
                 success: function(data) {
                     $("#paymentLoading").fadeOut(function() {
@@ -409,9 +482,13 @@ class App {
         var ts = new Date().getTime();
         $.ajax({
             method: "GET",
-            crossDomain: true,
+            headers: {
+                "ngrok-skip-browser-warning": "true"
+            },
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + this.userData.user.username + "/" + this.userData.user.first_name + "?ts=" + ts,
             success: function(data) {
+                app.price = data.price;
+                app.updatePriceDisplay();
                 if (data.is_follower) {
                     app.loadData()
                     tl.play();
@@ -435,7 +512,9 @@ class App {
             $("#settingsLoading").fadeIn();
             $.ajax({
                 method: "POST",
-                crossDomain: true,
+                headers: {
+                    "ngrok-skip-browser-warning": "true"
+                },
                 url: BACKEND + "/save/" + app.tgid,
                 data: {
                     address_withdraw: av,
@@ -480,8 +559,8 @@ class App {
 
     loadWithdrawStats() {
         var r = app.getRewards();
-        $("#earningsw").html(r);
-        $("#earningst").html((r / 10).toFixed(9));
+        $("#earningsw").html(this.formatNumber(r));
+        app.updatePriceDisplay();
     }
 
     withdraw() {
@@ -492,6 +571,9 @@ class App {
                     if (sure) {
                         $.ajax({
                             method: "POST",
+                            headers: {
+                                "ngrok-skip-browser-warning": "true"
+                            },
                             url: BACKEND + "/withdraw/" + app.tgid,
                             success: function(data) {
                                 clearTimeout(app.tmout);
@@ -541,6 +623,9 @@ class App {
     callRestartMining() {
         $.ajax({
             method: "POST",
+            headers: {
+                "ngrok-skip-browser-warning": "true"
+            },
             url: BACKEND + "/restart/" + app.tgid,
             success: function(data) {
                 app.countEarnings();
