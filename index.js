@@ -3,7 +3,7 @@ $( document ).ready(function() {
     window["app"] = app;
 });
 
-const BACKEND = "https://frenlytbot.aintchain.com"
+const BACKEND = "https://frenlybot.aintchain.com"
 
 class App {
 
@@ -115,7 +115,7 @@ class App {
                 location.reload();
             });
         } catch (e) {
-            console.log(e);
+            // console.log(e);
             this.tgid = 7422140567;
             this.loadData();
             $("#first_name").html("Dev");
