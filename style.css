@@ -313,6 +313,15 @@ btn-tg:focus {
     opacity: 0.7;
 }
 
+/* Boost button - red when boosts are available */
+.nav-btn-boost.boost-available i {
+    color: #C0392B;
+}
+
+.nav-btn-boost.boost-available span {
+    color: #C0392B;
+}
+
 /* Add padding to main content so it doesn't hide behind the nav */
 main {
     padding-bottom: 70px;

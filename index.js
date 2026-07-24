@@ -308,6 +308,9 @@ class App {
                 if (data.boosts != null && data.boosts.length > 0) {
                     console.log(data.boosts[0].link)
                     $("#health-boosts").html('<strong><a class="link-custom" href="https://' + data.boosts[0].link + '">' + data.boosts.length + ' Boosts Available</a></strong>');
+                    $(".nav-btn-boost").addClass("boost-available");
+                } else {
+                    $(".nav-btn-boost").removeClass("boost-available");
                 }
 
                 app.checkScroll();
@@ -720,8 +723,6 @@ class App {
     }
 
     boost() {
-        $("#boost").show();
-
         var username = "undefined";
         var first_name = "undefined";
         if (this.userData) {
@@ -730,33 +731,26 @@ class App {
         }
         var ts = new Date().getTime();
 
+        // First check if boosts are available
         $.ajax({
             method: "GET",
+            headers: {
+                "ngrok-skip-browser-warning": "true"
+            },
             crossDomain: true,
             url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
             success: function(data) {
-                $("#healthBoost").width(data.health + "%");
-                $("#health-text-boost").html(data.health + "%");
-
-                $("#healthBoost").animate({ width: '100%' }, function() {
-                            setTimeout(function() {
-                                app.tg.close();
-                            }, 2000);
-                        });
-                $.ajax({
-                    method: "POST",
-                    crossDomain: true,
-                    url: BACKEND + "/boost/" + app.tgid + "/" + app.userData.start_param + "?ts=" + ts,
-                    success: function(data) {
-                        $("#health-text-boost").html(data.health + "%");
-
-                        $("#healthBoost").animate({ width: data.health + '%' }, function() {
-                            setTimeout(function() {
-                                app.tg.close();
-                            }, 2000);
-                        });
-                    }
-                });
+                if (data.boosts != null && data.boosts.length > 0) {
+                    // Boosts available - open the first boost link
+                    app.tg.openTelegramLink('https://' + data.boosts[0].link);
+                } else {
+                    // No boosts available - show warning toast
+                    $("#successMessage").html("<strong style=\"color: #FFC107;\">⚠️ No boosts available</strong>");
+                    $("#successMessage").addClass("show");
+                    setTimeout(function() {
+                        $("#successMessage").removeClass("show");
+                    }, 5000);
+                }
             }
         });
     }
