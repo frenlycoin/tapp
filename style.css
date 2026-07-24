@@ -180,6 +180,14 @@ btn-tg:focus {
     margin: 0.3em 0.5em;
 }
 
+/* Reduce rotating wheel size by 10% on screens shorter than 1600px height */
+@media (max-height: 1599px) {
+    .wrapper {
+        transform: scale(0.9);
+        transform-origin: center center;
+    }
+}
+
 .wrapper {
     position: relative;
     display: flex;
