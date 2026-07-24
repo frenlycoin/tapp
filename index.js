@@ -43,13 +43,22 @@ class App {
             this.tg.expand();
             this.tg.enableClosingConfirmation();
 
-            // Try to request fullscreen (available in newer Telegram versions)
-            if (this.tg.requestFullscreen) {
-                this.tg.requestFullscreen();
-            }
-
             // Lock viewport to stable dimensions
             this.tg.disableVerticalSwipes();
+
+            // Keep the app expanded when viewport changes
+            Telegram.WebApp.onEvent('viewportChanged', function() {
+                if (!Telegram.WebApp.isExpanded) {
+                    Telegram.WebApp.expand();
+                }
+            });
+
+            // Re-expand on any resize (handles keyboard open/close, etc.)
+            window.addEventListener('resize', function() {
+                if (window.Telegram && Telegram.WebApp && !Telegram.WebApp.isExpanded) {
+                    Telegram.WebApp.expand();
+                }
+            });
 
             this.tg.SettingsButton.show();
             this.tg.SettingsButton.onClick(function() {
