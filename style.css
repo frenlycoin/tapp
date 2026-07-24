@@ -273,7 +273,7 @@ btn-tg:focus {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1px;
+    gap: 4px;
     background: none;
     border: none;
     color: var(--tg-theme-hint-color);
