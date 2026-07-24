@@ -271,7 +271,7 @@ btn-tg:focus {
     color: var(--tg-theme-hint-color);
     font-size: 0.65em;
     cursor: pointer;
-    padding: 2px 6px;
+    padding: 4px 6px;
     min-width: 60px;
     transition: color 0.15s ease;
 }
@@ -283,7 +283,7 @@ btn-tg:focus {
 
 .nav-btn span {
     color: var(--tg-theme-hint-color);
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: 900;
 }
 
