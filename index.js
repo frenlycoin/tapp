@@ -127,10 +127,9 @@ class App {
             // this.tg.close();
 
             if (userData.start_param && userData.start_param.startsWith('b-')) {
-                // app.tg.openTelegramLink('https://t.me/FrenlyNews/195');
-                this.boost();
+                this.showBoostScreen();
             } else {
-            this.loadData();
+                this.loadData();
                 $("#main").show();
             }
 
@@ -720,6 +719,51 @@ class App {
                 $("#referralSection").hide();
             }
         }
+    }
+
+    showBoostScreen() {
+        // Hide all main content, show only the boost screen
+        $("main").hide();
+        $("#bottom-nav").hide();
+        $("#boost").show();
+
+        var username = "undefined";
+        var first_name = "undefined";
+        if (this.userData) {
+            username = this.userData.user.username;
+            first_name = this.userData.user.first_name;
+        }
+        var ts = new Date().getTime();
+
+        $.ajax({
+            method: "GET",
+            crossDomain: true,
+            url: BACKEND + "/data/" + this.tgid + "/" + this.ref + "/" + username + "/" + first_name + "?ts=" + ts,
+            success: function(data) {
+                $("#healthBoost").width(data.health + "%");
+                $("#health-text-boost").html(data.health + "%");
+
+                $("#healthBoost").animate({ width: '100%' }, function() {
+                    setTimeout(function() {
+                        app.tg.close();
+                    }, 2000);
+                });
+                $.ajax({
+                    method: "POST",
+                    crossDomain: true,
+                    url: BACKEND + "/boost/" + app.tgid + "/" + app.userData.start_param + "?ts=" + ts,
+                    success: function(data) {
+                        $("#health-text-boost").html(data.health + "%");
+
+                        $("#healthBoost").animate({ width: data.health + '%' }, function() {
+                            setTimeout(function() {
+                                app.tg.close();
+                            }, 2000);
+                        });
+                    }
+                });
+            }
+        });
     }
 
     boost() {
