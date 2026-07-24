@@ -276,11 +276,10 @@ class App {
                     
                     $("#successMessage").html("<small><strong>Mining is already active, wait for the notification to restart.</strong></small>");
 
-                    $("#successMessage").fadeIn(function() {
-                        setTimeout(function() {
-                            $("#successMessage").fadeOut();
-                        }, 5000);
-                    });
+                    $("#successMessage").addClass("show");
+                    setTimeout(function() {
+                        $("#successMessage").removeClass("show");
+                    }, 5000);
                     app.miningAlreadyActive = false;
                 } else if (!app.miningActive && app.miningRestart) {
                     tl.play();
@@ -324,11 +323,11 @@ class App {
 
         navigator.clipboard.writeText(copyText.value);
 
-        $("#refLinkSuccess").fadeIn(function() {
-            setTimeout(function() {
-                $("#refLinkSuccess").fadeOut();
-            }, 5000);
-        });
+        $("#successMessage").html("<small><strong>Link successfully copied.</strong></small>");
+        $("#successMessage").addClass("show");
+        setTimeout(function() {
+            $("#successMessage").removeClass("show");
+        }, 5000);
     }
 
     copyAddress() {
@@ -445,11 +444,10 @@ class App {
 
                 $("#successMessage").html("<small><strong>Reward compounding done successfully.</strong></small>");
 
-                $("#successMessage").fadeIn(function() {
-                    setTimeout(function() {
-                        $("#successMessage").fadeOut();
-                    }, 5000);
-                });
+                $("#successMessage").addClass("show");
+                setTimeout(function() {
+                    $("#successMessage").removeClass("show");
+                }, 5000);
             }
         });
     }
@@ -610,11 +608,10 @@ class App {
     
                         $("#successMessage").html("<small><strong>Withdraw done successfully.</strong></small>");
     
-                        $("#successMessage").fadeIn(function() {
-                            setTimeout(function() {
-                                $("#successMessage").fadeOut();
-                            }, 5000);
-                        });
+                        $("#successMessage").addClass("show");
+                        setTimeout(function() {
+                            $("#successMessage").removeClass("show");
+                        }, 5000);
                     }
                 });
             } else {
@@ -659,11 +656,10 @@ class App {
 
                 $("#successMessage").html("<small><strong>Daily mining cycle restarted successfully.</strong></small>");
 
-                $("#successMessage").fadeIn(function() {
-                    setTimeout(function() {
-                        $("#successMessage").fadeOut();
-                    }, 5000);
-                });
+                $("#successMessage").addClass("show");
+                setTimeout(function() {
+                    $("#successMessage").removeClass("show");
+                }, 5000);
             }
         });
     }
