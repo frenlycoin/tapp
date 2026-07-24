@@ -242,6 +242,12 @@ btn-tg:focus {
     background-color: var(--tg-theme-button-color);
 }
 
+/* Ensure progress bars have proper positioning context */
+.progress {
+    position: relative !important;
+    overflow: hidden !important;
+}
+
 .progress-text {
     position: absolute;
     text-align: center;
@@ -249,7 +255,12 @@ btn-tg:focus {
     color: #FFF;
     width: 100%;
     left: 0;
-    margin-top: -1px;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    pointer-events: none;
 }
 
 /* Sticky bottom navigation */
