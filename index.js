@@ -58,6 +58,7 @@ class App {
                 if (window.Telegram && Telegram.WebApp && !Telegram.WebApp.isExpanded) {
                     Telegram.WebApp.expand();
                 }
+                app.checkScroll();
             });
 
             this.tg.SettingsButton.show();
@@ -308,6 +309,8 @@ class App {
                     console.log(data.boosts[0].link)
                     $("#health-boosts").html('<strong><a class="link-custom" href="https://' + data.boosts[0].link + '">' + data.boosts.length + ' Boosts Available</a></strong>');
                 }
+
+                app.checkScroll();
             }
         });
     }
@@ -689,6 +692,29 @@ class App {
         // $("#infoMessage").removeClass("mt-1");
         // $(".miner").addClass("p-2");
         // $(".miner").addClass("pb-3");
+    }
+
+    checkScroll() {
+        // First, show both sections so we can measure properly
+        $("#healthSection").show();
+        $("#referralSection").show();
+
+        // Force layout reflow to get accurate scroll dimensions
+        void document.body.offsetHeight;
+
+        var scrollable = document.documentElement.scrollHeight > window.innerHeight;
+
+        if (scrollable) {
+            // Hide healthSection first
+            $("#healthSection").hide();
+            void document.body.offsetHeight;
+
+            // Re-check if there's still scroll
+            if (document.documentElement.scrollHeight > window.innerHeight) {
+                // Hide referralSection too
+                $("#referralSection").hide();
+            }
+        }
     }
 
     boost() {
