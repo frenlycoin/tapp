@@ -41,7 +41,7 @@ class App {
 
             // Expand to fullscreen
             this.tg.expand();
-            this.tg.enableClosingConfirmation();
+            // this.tg.enableClosingConfirmation();
 
             // Lock viewport to stable dimensions
             this.tg.disableVerticalSwipes();
