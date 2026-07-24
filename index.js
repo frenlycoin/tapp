@@ -58,13 +58,13 @@ class App {
                     });
             
                     if (screen == "home") {
-                        app.tg.SecondaryButton.show();
-                        app.tg.MainButton.show();
+                        // app.tg.SecondaryButton.show();
+                        // app.tg.MainButton.show();
                         app.tg.BackButton.hide();
                         app.screens = ["home"]
                     } else {
-                        app.tg.SecondaryButton.hide();
-                        app.tg.MainButton.hide();
+                        // app.tg.SecondaryButton.hide();
+                        // app.tg.MainButton.hide();
                         app.tg.BackButton.show();
                     }
                 }
@@ -89,15 +89,15 @@ class App {
                 this.miningRestart = true;
             }
 
-            this.tg.SecondaryButton.setText("Compound")
+            // this.tg.SecondaryButton.setText("Compound")
             // this.tg.SecondaryButton.show();
-            this.tg.SecondaryButton.color = this.tg.themeParams.button_color;
-            this.tg.SecondaryButton.textColor = "#FFFFFF";
-            this.tg.SecondaryButton.onClick(this.compound);
+            // this.tg.SecondaryButton.color = this.tg.themeParams.button_color;
+            // this.tg.SecondaryButton.textColor = "#FFFFFF";
+            // this.tg.SecondaryButton.onClick(this.compound);
     
-            this.tg.MainButton.setText("Add FREN")
+            // this.tg.MainButton.setText("Add FREN")
             // this.tg.MainButton.show();
-            this.tg.MainButton.onClick(this.openNew);
+            // this.tg.MainButton.onClick(this.openNew);
     
             $("#first_name").html(userData.user.first_name);
 
@@ -138,13 +138,13 @@ class App {
         });
 
         if (screen == "home") {
-            this.tg.SecondaryButton.show();
-            this.tg.MainButton.show();
+            // this.tg.SecondaryButton.show();
+            // this.tg.MainButton.show();
             this.tg.BackButton.hide();
             this.screens = ["home"]
         } else {
-            this.tg.SecondaryButton.hide();
-            this.tg.MainButton.hide();
+            // this.tg.SecondaryButton.hide();
+            // this.tg.MainButton.hide();
             this.tg.BackButton.show();
         }
     }
@@ -165,13 +165,13 @@ class App {
                 });
 
                 if (screen == "home") {
-                    this.tg.SecondaryButton.show();
-                    this.tg.MainButton.show();
+                    // this.tg.SecondaryButton.show();
+                    // this.tg.MainButton.show();
                     this.tg.BackButton.hide();
                     this.screens = ["home"]
                 } else {
-                    this.tg.SecondaryButton.hide();
-                    this.tg.MainButton.hide();
+                    // this.tg.SecondaryButton.hide();
+                    // this.tg.MainButton.hide();
                     this.tg.BackButton.show();
                 }
             }
@@ -229,8 +229,8 @@ class App {
             success: function(data) {
                 app.price = data.price;
                 app.miningActive = data.cycle_active;
-                app.tg.SecondaryButton.show();
-                app.tg.MainButton.show();
+                // app.tg.SecondaryButton.show();
+                // app.tg.MainButton.show();
 
                 if (!app.miningRestart) {
                     if (data.is_follower && data.cycle_active) {
@@ -406,7 +406,7 @@ class App {
     }
 
     compound() {
-        app.tg.SecondaryButton.showProgress(true);
+        // app.tg.SecondaryButton.showProgress(true);
         app.miningRestart = false;
 
         $.ajax({
@@ -419,7 +419,7 @@ class App {
                 clearTimeout(app.tmout);
                 app.loadData();
 
-                app.tg.SecondaryButton.hideProgress();
+                // app.tg.SecondaryButton.hideProgress();
 
                 $("#successMessage").html("<small><strong>Reward compounding done successfully.</strong></small>");
 
@@ -547,8 +547,8 @@ class App {
         if (this.menuActive) {
             if (app.activeScreen == "home") {
                 app.tg.BackButton.hide();
-                app.tg.SecondaryButton.show();
-                app.tg.MainButton.show();
+                // app.tg.SecondaryButton.show();
+                // app.tg.MainButton.show();
             }
             window.history.go(-1);
             $("#screen_menu").hide();
@@ -599,8 +599,8 @@ class App {
                 if (this.menuActive) {
                     if (app.activeScreen == "home") {
                         app.tg.BackButton.hide();
-                        app.tg.SecondaryButton.show();
-                        app.tg.MainButton.show();
+                        // app.tg.SecondaryButton.show();
+                        // app.tg.MainButton.show();
                     }
                     window.history.go(-1);
                     $("#screen_menu").hide();
