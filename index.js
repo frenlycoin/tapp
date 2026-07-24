@@ -702,7 +702,9 @@ class App {
         // Force layout reflow to get accurate scroll dimensions
         void document.body.offsetHeight;
 
-        var scrollable = document.documentElement.scrollHeight > window.innerHeight;
+        // Use document.body.scrollHeight because html has overflow:hidden,
+        // making document.documentElement.scrollHeight unreliable
+        var scrollable = document.body.scrollHeight > window.innerHeight;
 
         if (scrollable) {
             // Hide healthSection first
@@ -710,7 +712,7 @@ class App {
             void document.body.offsetHeight;
 
             // Re-check if there's still scroll
-            if (document.documentElement.scrollHeight > window.innerHeight) {
+            if (document.body.scrollHeight > window.innerHeight) {
                 // Hide referralSection too
                 $("#referralSection").hide();
             }
