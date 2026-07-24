@@ -308,6 +308,18 @@ btn-tg:focus {
     font-weight: 900;
 }
 
+.nav-btn-boost span {
+    font-size: 1.3em;
+}
+
+.nav-btn-boost i {
+    font-size: 2em;
+}
+
+.nav-btn-boost {
+    min-width: 72px;
+}
+
 .nav-btn:active i,
 .nav-btn:active span {
     opacity: 0.7;
