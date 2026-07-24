@@ -38,6 +38,19 @@ class App {
         this.miningRestart = false;
         try {
             this.tg = Telegram.WebApp;
+
+            // Expand to fullscreen
+            this.tg.expand();
+            this.tg.enableClosingConfirmation();
+
+            // Try to request fullscreen (available in newer Telegram versions)
+            if (this.tg.requestFullscreen) {
+                this.tg.requestFullscreen();
+            }
+
+            // Lock viewport to stable dimensions
+            this.tg.disableVerticalSwipes();
+
             this.tg.SettingsButton.show();
             this.tg.SettingsButton.onClick(function() {
                 app.menuActive = false;
