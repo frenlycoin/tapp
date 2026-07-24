@@ -194,8 +194,9 @@ btn-tg:focus {
     align-items: center;
     flex-wrap: wrap;
     width: 1px;
-    height: 41vh;
-    margin-top: -9vh;
+    height: 33vh;
+    margin-top: -7vh;
+    margin-bottom: 2vh;
 }
 
 .wrapper2 {
@@ -204,8 +205,9 @@ btn-tg:focus {
     align-items: center;
     flex-wrap: wrap;
     width: 1px;
-    height: 25vh;
-    margin-top: -4vh;
+    height: 20vh;
+    margin-top: -3vh;
+    margin-bottom: 1vh;
 }
 
 .el {
