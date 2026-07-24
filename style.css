@@ -240,3 +240,55 @@ btn-tg:focus {
     left: 0;
     margin-top: -1px;
 }
+
+/* Sticky bottom navigation */
+#bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--tg-theme-secondary-bg-color);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 6px 0;
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
+    z-index: 1000;
+}
+
+.nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    background: none;
+    border: none;
+    color: var(--tg-theme-hint-color);
+    font-size: 0.65em;
+    cursor: pointer;
+    padding: 4px 8px;
+    min-width: 60px;
+    transition: color 0.15s ease;
+}
+
+.nav-btn i {
+    font-size: 1.5em;
+    color: var(--tg-theme-button-color);
+}
+
+.nav-btn span {
+    color: var(--tg-theme-hint-color);
+    font-size: 0.9em;
+}
+
+.nav-btn:active i,
+.nav-btn:active span {
+    opacity: 0.7;
+}
+
+/* Add padding to main content so it doesn't hide behind the nav */
+main {
+    padding-bottom: 70px;
+}

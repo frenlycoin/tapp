@@ -449,6 +449,11 @@ class App {
         app.openScreen('new');
     }
 
+    showTasks() {
+        // Open the Telegram channel where tasks/announcements are posted
+        app.tg.openTelegramLink('https://t.me/FrenlyNews');
+    }
+
     checkPayment() {
         $("#payment").fadeOut(function() {
             $("#paymentLoading").fadeIn();
