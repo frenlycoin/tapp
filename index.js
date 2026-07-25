@@ -317,6 +317,46 @@ class App {
                     $("#healthref").addClass("bg-success");
                 }
 
+                // Update referral stats
+                if (data.referral_count != null) {
+                    $("#referralCount").html(data.referral_count);
+                }
+                if (data.referred_users != null) {
+                    var activeCount = data.referred_users.filter(function(u) { return u.is_active; }).length;
+                    $("#activeReferralCount").html(activeCount);
+                } else {
+                    $("#activeReferralCount").html("0");
+                }
+
+                // Update inactive miners list
+                if (data.referred_users != null) {
+                    var inactiveUsers = data.referred_users.filter(function(u) { return !u.is_active; });
+                    if (inactiveUsers.length > 0) {
+                        var listHtml = "";
+                        for (var i = 0; i < inactiveUsers.length; i++) {
+                            var u = inactiveUsers[i];
+                            if (i > 0) {
+                                listHtml += "<br>";
+                            }
+                            if (u.username && u.username != "undefined" && u.username != "") {
+                                listHtml += '<strong><a class="link-custom" href="https://t.me/' + u.username + '" target="_blank">' + u.name + '</a></strong>';
+                            } else {
+                                listHtml += u.name;
+                            }
+                        }
+                        $("#inactiveMinersList").html(listHtml);
+                        $("#remindButtonSection").show();
+                    } else {
+                        $("#inactiveMinersList").html("0");
+                        $("#remindButtonSection").hide();
+                    }
+                    $("#inactiveMinersSection").show();
+                } else {
+                    $("#inactiveMinersList").html("0");
+                    $("#remindButtonSection").hide();
+                    $("#inactiveMinersSection").show();
+                }
+
                 // Update notification dot on Referred button
                 if (healthRef < 100) {
                     $("#referred-dot").show();
@@ -485,6 +525,10 @@ class App {
 
     openNew() {
         app.openScreen('new');
+    }
+
+    showReferrals() {
+        app.openScreen('referrals');
     }
 
     showTasks() {
