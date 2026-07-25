@@ -322,6 +322,30 @@ btn-tg:focus {
     color: #C0392B;
 }
 
+/* Notification dot for nav buttons */
+.nav-dot {
+    display: none;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.nav-dot.dot-danger {
+    background-color: #DC4040;
+}
+
+.nav-dot.dot-warning {
+    background-color: #FFC107;
+}
+
+.nav-btn-referred {
+    position: relative;
+}
+
 /* Add padding to main content so it doesn't hide behind the nav */
 main {
     padding-bottom: 70px;

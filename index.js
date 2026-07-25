@@ -304,6 +304,32 @@ class App {
                     app.countEarnings();
                 }
 
+                // Update referral health progress bar
+                var healthRef = (data.health_ref || 0) * 100;
+                $("#healthref").width(healthRef + "%");
+                $("#healthref-text").html(parseInt(healthRef) + "%");
+                $("#healthref").removeClass("bg-success bg-warning bg-danger");
+                if (healthRef <= 33) {
+                    $("#healthref").addClass("bg-danger");
+                } else if (healthRef <= 66) {
+                    $("#healthref").addClass("bg-warning");
+                } else if (healthRef >= 100) {
+                    $("#healthref").addClass("bg-success");
+                }
+
+                // Update notification dot on Referred button
+                if (healthRef < 100) {
+                    $("#referred-dot").show();
+                    $("#referred-dot").removeClass("dot-danger dot-warning dot-success");
+                    if (healthRef <= 33) {
+                        $("#referred-dot").addClass("dot-danger");
+                    } else if (healthRef <= 66) {
+                        $("#referred-dot").addClass("dot-warning");
+                    }
+                } else {
+                    $("#referred-dot").hide();
+                }
+
                 if (data.boosts != null && data.boosts.length > 0) {
                     console.log(data.boosts[0].link)
                     $("#health-boosts").html('<strong><a class="link-custom" href="https://' + data.boosts[0].link + '">' + data.boosts.length + ' Boosts Available</a></strong>');
