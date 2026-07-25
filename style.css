@@ -376,6 +376,11 @@ main {
     transform: translateY(0);
 }
 
+#errorMessage small,
+#errorMessage strong {
+    color: #DC4040;
+}
+
 .toast-alert small {
     color: #28A745;
 }

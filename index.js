@@ -852,27 +852,24 @@ class App {
                             }, 5000);
                         } else {
                             $("#errorMessage").html("<small><strong>" + data.errorMessage + "</strong></small>");
-                            $("#errorMessage").fadeIn(function() {
-                                setTimeout(function() {
-                                    $("#errorMessage").fadeOut();
-                                }, 5000);
-                            });
+                            $("#errorMessage").addClass("show");
+                            setTimeout(function() {
+                                $("#errorMessage").removeClass("show");
+                            }, 5000);
                         }
                     } catch(e) {
                         $("#errorMessage").html("<small><strong>Something went wrong.</strong></small>");
-                        $("#errorMessage").fadeIn(function() {
-                            setTimeout(function() {
-                                $("#errorMessage").fadeOut();
-                            }, 5000);
-                        });
+                        $("#errorMessage").addClass("show");
+                        setTimeout(function() {
+                            $("#errorMessage").removeClass("show");
+                        }, 5000);
                     }
                 } else {
                     $("#errorMessage").html("<small><strong>Something went wrong.</strong></small>");
-                    $("#errorMessage").fadeIn(function() {
-                        setTimeout(function() {
-                            $("#errorMessage").fadeOut();
-                        }, 5000);
-                    });
+                    $("#errorMessage").addClass("show");
+                    setTimeout(function() {
+                        $("#errorMessage").removeClass("show");
+                    }, 5000);
                 }
             }
         };
