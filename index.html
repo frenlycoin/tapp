@@ -103,13 +103,13 @@
             </div>
 
             <div id="miningno" class="hidden mt-4">
-              <p class="text small mb-0">To start mining, subscribe to <a href="https://t.me/FrenlyNews" target="_blank" class="link-custom"><strong>@FrenlyNews</strong></a> Telegram channel, return here and click the button bellow.</p>
+              <p class="text small mb-0" id="miningno-subscribe">To start mining, subscribe to <a href="https://t.me/FrenlyNews" target="_blank" class="link-custom"><strong>@FrenlyNews</strong></a> Telegram channel, return here and click the button bellow.</p>
               <p class="text-danger mt-3 mb-0" id="mineError" style="font-size: small; display: none;"><strong>You still haven't subscribed to the channel.</strong></p>
               <div class="mt-4 d-grid"><button type="button" class="btn btn-tg" onclick="app.startMining();">⚪️ <small><strong>Start Mining</strong></small></button></div>
             </div>
 
             <div id="miningnocycle" class="hidden mt-4">
-              <p class="text small mb-0">To restart mining, click the button on <a href="https://t.me/FrenlyNews/96" target="_blank" class="link-custom"><strong>Frenly News</strong></a> Telegram channel.</p>
+              <p class="text small mb-0" id="miningnocycle-link">To restart mining, click the button on <a href="https://t.me/FrenlyNews/96" target="_blank" class="link-custom"><strong>Frenly News</strong></a> Telegram channel.</p>
               <!-- <div class="mt-4 d-grid"><button type="button" class="btn btn-tg" onclick="app.startMining();">⚪️ <small><strong>Restart Mining</strong></small></button></div> -->
             </div>
 
@@ -265,7 +265,7 @@
           </small></p>
 
           <p class="text"><small>
-            <span class="text2">Frenly App (@FrenlyRobot) is a TON mining game that sells ads on its channel and distributes earnings to its users to keep TON users informed and engaged and reward them for it.</span>
+            <span class="text2" id="about-app-name">Frenly App (@FrenlyRobot) is a TON mining game that sells ads on its channel and distributes earnings to its users to keep TON users informed and engaged and reward them for it.</span>
           </small></p>
           <p class="text"><small>
             <span class="text2">It creates new TON by many different means:</span>
@@ -280,7 +280,7 @@
             <li class="text2"><small><i class="fa-solid fa-check-double"></i>&nbsp;&nbsp;selling other perks in the app</small></li>
           </ul>
           <p class="text"><small>
-            <span class="text2">Each user receives 0.01 FREN (Frenly Energy) for free and to start mining, he has to subscribe to @FrenlyNews channel, channel for publishing ads and news about TON ecosystem and projects in it.</span>
+            <span class="text2" id="about-news-channel">Each user receives 0.01 FREN (Frenly Energy) for free and to start mining, he has to subscribe to @FrenlyNews channel, channel for publishing ads and news about TON ecosystem and projects in it.</span>
           </small></p>
 
           <p class="text"><small>
@@ -331,7 +331,7 @@
             <p class="ms-3"> <a href="#" class="link-custom" onclick="app.showWithdraw();"><strong>Withdraw</strong></a> </p>
             <p class="ms-3"> <a href="javascript:void(0);" onclick="app.openScreen('about');" class="link-custom"><strong>About</strong></a> </p>
             <p class="ms-3"> <a href="javascript:void(0);" onclick="app.openScreen('faq');" class="link-custom"><strong>FAQ</strong></a> </p>
-            <p class="ms-3"> <a href="https://t.me/FrenlyCoin" class="link-custom" target="_blank"><strong>Contact</strong></a> </p>
+            <p class="ms-3"> <a href="https://t.me/FrenlyCoin" class="link-custom" target="_blank" id="contact-link"><strong>Contact</strong></a> </p>
             <p class="ms-3"> <a href="javascript:void(0);" onclick="app.openScreen('settings');" class="link-custom"><strong>Settings</strong></a> </p>
           </div>
         </div>
@@ -401,7 +401,7 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="./anime.min.js"></script>
-    <script src="./index.js?v=1.0.20"></script>
+    <script src="./index.js?v=1.0.21"></script>
 
   </body>
 </html>

@@ -26,6 +26,7 @@ class App {
     miningActive;
     miningRestart;
     viewportHeight;
+    dev;
 
     constructor() {
         this.simulationRunning = false;
@@ -377,6 +378,12 @@ class App {
                 } else {
                     $(".nav-btn-boost").removeClass("boost-available");
                 }
+
+                // Store dev flag and update Telegram links
+                app.dev = data.dev || false;
+                app.updateTelegramLinks();
+                // Re-update refLink with the code for both refLink elements
+                $("[id='refLink']").html("t.me/" + (app.dev ? "Dev" : "") + "FrenlyRobot?start=" + data.code);
 
                 app.checkScroll();
             }
@@ -874,6 +881,80 @@ class App {
             }
         };
         xhr.send();
+    }
+
+    updateTelegramLinks() {
+        var prefix = this.dev ? "Dev" : "";
+        
+        // Update refLink elements (t.me/FrenlyRobot -> t.me/DevFrenlyRobot)
+        $("[id='refLink']").each(function() {
+            var html = $(this).html();
+            html = html.replace(/FrenlyRobot/g, prefix + "FrenlyRobot");
+            html = html.replace(/FrenlyNews/g, prefix + "FrenlyNews");
+            html = html.replace(/FrenlyCoin/g, prefix + "FrenlyCoin");
+            $(this).html(html);
+        });
+
+        // Update miningno-subscribe (FrenlyNews)
+        var subscribeHtml = $("#miningno-subscribe").html();
+        if (subscribeHtml) {
+            subscribeHtml = subscribeHtml.replace(/FrenlyRobot/g, prefix + "FrenlyRobot");
+            subscribeHtml = subscribeHtml.replace(/FrenlyNews/g, prefix + "FrenlyNews");
+            subscribeHtml = subscribeHtml.replace(/FrenlyCoin/g, prefix + "FrenlyCoin");
+            $("#miningno-subscribe").html(subscribeHtml);
+        }
+
+        // Update miningnocycle-link (FrenlyNews)
+        var nocycleHtml = $("#miningnocycle-link").html();
+        if (nocycleHtml) {
+            nocycleHtml = nocycleHtml.replace(/FrenlyRobot/g, prefix + "FrenlyRobot");
+            nocycleHtml = nocycleHtml.replace(/FrenlyNews/g, prefix + "FrenlyNews");
+            nocycleHtml = nocycleHtml.replace(/FrenlyCoin/g, prefix + "FrenlyCoin");
+            $("#miningnocycle-link").html(nocycleHtml);
+        }
+
+        // Update infoMessage (FrenlyCoin)
+        var infoHtml = $("#infoMessage").html();
+        if (infoHtml) {
+            infoHtml = infoHtml.replace(/FrenlyRobot/g, prefix + "FrenlyRobot");
+            infoHtml = infoHtml.replace(/FrenlyNews/g, prefix + "FrenlyNews");
+            infoHtml = infoHtml.replace(/FrenlyCoin/g, prefix + "FrenlyCoin");
+            $("#infoMessage").html(infoHtml);
+        }
+
+        // Update contact link
+        var contactLink = $("#contact-link").attr("href");
+        if (contactLink) {
+            contactLink = contactLink.replace(/FrenlyRobot/g, prefix + "FrenlyRobot");
+            contactLink = contactLink.replace(/FrenlyNews/g, prefix + "FrenlyNews");
+            contactLink = contactLink.replace(/FrenlyCoin/g, prefix + "FrenlyCoin");
+            $("#contact-link").attr("href", contactLink);
+        }
+        var contactHtml = $("#contact-link").html();
+        if (contactHtml) {
+            contactHtml = contactHtml.replace(/FrenlyRobot/g, prefix + "FrenlyRobot");
+            contactHtml = contactHtml.replace(/FrenlyNews/g, prefix + "FrenlyNews");
+            contactHtml = contactHtml.replace(/FrenlyCoin/g, prefix + "FrenlyCoin");
+            $("#contact-link").html(contactHtml);
+        }
+
+        // Update about-app-name
+        var aboutAppHtml = $("#about-app-name").html();
+        if (aboutAppHtml) {
+            aboutAppHtml = aboutAppHtml.replace(/FrenlyRobot/g, prefix + "FrenlyRobot");
+            aboutAppHtml = aboutAppHtml.replace(/FrenlyNews/g, prefix + "FrenlyNews");
+            aboutAppHtml = aboutAppHtml.replace(/FrenlyCoin/g, prefix + "FrenlyCoin");
+            $("#about-app-name").html(aboutAppHtml);
+        }
+
+        // Update about-news-channel
+        var aboutNewsHtml = $("#about-news-channel").html();
+        if (aboutNewsHtml) {
+            aboutNewsHtml = aboutNewsHtml.replace(/FrenlyRobot/g, prefix + "FrenlyRobot");
+            aboutNewsHtml = aboutNewsHtml.replace(/FrenlyNews/g, prefix + "FrenlyNews");
+            aboutNewsHtml = aboutNewsHtml.replace(/FrenlyCoin/g, prefix + "FrenlyCoin");
+            $("#about-news-channel").html(aboutNewsHtml);
+        }
     }
 
     boost() {
