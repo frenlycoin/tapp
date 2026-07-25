@@ -788,7 +788,7 @@ class App {
                     app.tg.openTelegramLink('https://' + data.boosts[0].link);
                 } else {
                     // No boosts available - show warning toast
-                    $("#successMessage").html("<strong style=\"color: #FFC107;\">⚠️ No boosts available</strong>");
+                    $("#successMessage").html("<small><strong style=\"color: #FFC107;\">No boosts available.</strong></small>");
                     $("#successMessage").addClass("show");
                     setTimeout(function() {
                         $("#successMessage").removeClass("show");
