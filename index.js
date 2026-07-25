@@ -847,20 +847,25 @@ class App {
                 if (data.success) {
                     $("#successMessage").html("<small><strong>Reminders sent successfully.</strong></small>");
                     $("#successMessage").addClass("show");
+                    setTimeout(function() {
+                        $("#successMessage").removeClass("show");
+                    }, 5000);
                 } else {
-                    $("#successMessage").html("<small style=\"color: #DC4040;\"><strong>" + data.error + "</strong></small>");
-                    $("#successMessage").addClass("show");
+                    $("#errorMessage").html("<small><strong>" + data.error + "</strong></small>");
+                    $("#errorMessage").fadeIn(function() {
+                        setTimeout(function() {
+                            $("#errorMessage").fadeOut();
+                        }, 5000);
+                    });
                 }
-                setTimeout(function() {
-                    $("#successMessage").removeClass("show");
-                }, 5000);
             },
             error: function() {
-                $("#successMessage").html("<small style=\"color: #DC4040;\"><strong>Something went wrong.</strong></small>");
-                $("#successMessage").addClass("show");
-                setTimeout(function() {
-                    $("#successMessage").removeClass("show");
-                }, 5000);
+                $("#errorMessage").html("<small><strong>Something went wrong.</strong></small>");
+                $("#errorMessage").fadeIn(function() {
+                    setTimeout(function() {
+                        $("#errorMessage").fadeOut();
+                    }, 5000);
+                });
             }
         });
     }
