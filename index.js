@@ -841,6 +841,7 @@ class App {
             headers: {
                 "ngrok-skip-browser-warning": "true"
             },
+            crossDomain: true,
             url: BACKEND + "/remind/" + this.tgid,
             success: function(data) {
                 if (data.success) {
@@ -850,6 +851,13 @@ class App {
                     $("#successMessage").html("<small style=\"color: #DC4040;\"><strong>" + data.error + "</strong></small>");
                     $("#successMessage").addClass("show");
                 }
+                setTimeout(function() {
+                    $("#successMessage").removeClass("show");
+                }, 5000);
+            },
+            error: function() {
+                $("#successMessage").html("<small style=\"color: #DC4040;\"><strong>Something went wrong.</strong></small>");
+                $("#successMessage").addClass("show");
                 setTimeout(function() {
                     $("#successMessage").removeClass("show");
                 }, 5000);
