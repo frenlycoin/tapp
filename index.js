@@ -851,7 +851,7 @@ class App {
                                 $("#successMessage").removeClass("show");
                             }, 5000);
                         } else {
-                            $("#errorMessage").html("<small><strong>" + data.error + "</strong></small>");
+                            $("#errorMessage").html("<small><strong>" + data.errorMessage + "</strong></small>");
                             $("#errorMessage").fadeIn(function() {
                                 setTimeout(function() {
                                     $("#errorMessage").fadeOut();
