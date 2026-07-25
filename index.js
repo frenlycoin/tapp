@@ -835,6 +835,28 @@ class App {
         });
     }
 
+    remindInactive() {
+        $.ajax({
+            method: "GET",
+            headers: {
+                "ngrok-skip-browser-warning": "true"
+            },
+            url: BACKEND + "/remind/" + this.tgid,
+            success: function(data) {
+                if (data.success) {
+                    $("#successMessage").html("<small><strong>Reminders sent successfully.</strong></small>");
+                    $("#successMessage").addClass("show");
+                } else {
+                    $("#successMessage").html("<small style=\"color: #DC4040;\"><strong>" + data.error + "</strong></small>");
+                    $("#successMessage").addClass("show");
+                }
+                setTimeout(function() {
+                    $("#successMessage").removeClass("show");
+                }, 5000);
+            }
+        });
+    }
+
     boost() {
         var username = "undefined";
         var first_name = "undefined";
