@@ -836,38 +836,47 @@ class App {
     }
 
     remindInactive() {
-        $.ajax({
-            method: "GET",
-            headers: {
-                "ngrok-skip-browser-warning": "true"
-            },
-            crossDomain: true,
-            url: BACKEND + "/remind/" + this.tgid,
-            success: function(data) {
-                if (data.success) {
-                    $("#successMessage").html("<small><strong>Reminders sent successfully.</strong></small>");
-                    $("#successMessage").addClass("show");
-                    setTimeout(function() {
-                        $("#successMessage").removeClass("show");
-                    }, 5000);
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", BACKEND + "/remind/" + this.tgid, true);
+        xhr.setRequestHeader("ngrok-skip-browser-warning", "true");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        if (data.success) {
+                            $("#successMessage").html("<small><strong>Reminders sent successfully.</strong></small>");
+                            $("#successMessage").addClass("show");
+                            setTimeout(function() {
+                                $("#successMessage").removeClass("show");
+                            }, 5000);
+                        } else {
+                            $("#errorMessage").html("<small><strong>" + data.error + "</strong></small>");
+                            $("#errorMessage").fadeIn(function() {
+                                setTimeout(function() {
+                                    $("#errorMessage").fadeOut();
+                                }, 5000);
+                            });
+                        }
+                    } catch(e) {
+                        $("#errorMessage").html("<small><strong>Something went wrong.</strong></small>");
+                        $("#errorMessage").fadeIn(function() {
+                            setTimeout(function() {
+                                $("#errorMessage").fadeOut();
+                            }, 5000);
+                        });
+                    }
                 } else {
-                    $("#errorMessage").html("<small><strong>" + data.error + "</strong></small>");
+                    $("#errorMessage").html("<small><strong>Something went wrong.</strong></small>");
                     $("#errorMessage").fadeIn(function() {
                         setTimeout(function() {
                             $("#errorMessage").fadeOut();
                         }, 5000);
                     });
                 }
-            },
-            error: function() {
-                $("#errorMessage").html("<small><strong>Something went wrong.</strong></small>");
-                $("#errorMessage").fadeIn(function() {
-                    setTimeout(function() {
-                        $("#errorMessage").fadeOut();
-                    }, 5000);
-                });
             }
-        });
+        };
+        xhr.send();
     }
 
     boost() {
