@@ -828,7 +828,7 @@ class App {
 
                 $("#healthBoost").animate({ width: '100%' }, function() {
                     setTimeout(function() {
-                        app.tg.close();
+                        app.tg.minimize();
                     }, 2000);
                 });
                 $.ajax({
@@ -840,7 +840,7 @@ class App {
 
                         $("#healthBoost").animate({ width: data.health + '%' }, function() {
                             setTimeout(function() {
-                                app.tg.close();
+                                app.tg.minimize();
                             }, 2000);
                         });
                     }
