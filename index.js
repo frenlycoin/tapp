@@ -40,13 +40,6 @@ class App {
         try {
             this.tg = Telegram.WebApp;
 
-            // Ask permission for bot to send messages
-            this.tg.requestWriteAccess(function(success) {
-                if (success) {
-                    console.log("Write access granted");
-                }
-            });
-
             // Expand to fullscreen
             this.tg.expand();
             // this.tg.enableClosingConfirmation();
@@ -141,15 +134,21 @@ class App {
                 $("#main").show();
             }
 
+            // Refresh data when app comes back to focus (desktop/telegram)
             Telegram.WebApp.onEvent("activated", function() {
                 location.reload();
             });
 
-            // Refresh app when page becomes visible again (e.g. switching back to tab/desktop)
-            document.addEventListener("focus", function() {
-                if (!document.hidden) {
+            // Handle page being restored from cache (bfcache)
+            window.addEventListener("pageshow", function(e) {
+                if (e.persisted) {
                     location.reload();
                 }
+            });
+
+            // Handle visibility changes / tab focus
+            window.addEventListener("focus", function() {
+                location.reload();
             });
         } catch (e) {
             // console.log(e);
