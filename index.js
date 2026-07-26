@@ -144,6 +144,13 @@ class App {
             Telegram.WebApp.onEvent("activated", function() {
                 location.reload();
             });
+
+            // Refresh app when page becomes visible again (e.g. switching back to tab/desktop)
+            document.addEventListener("visibilitychange", function() {
+                if (!document.hidden) {
+                    location.reload();
+                }
+            });
         } catch (e) {
             // console.log(e);
             this.tgid = 7422140567;
