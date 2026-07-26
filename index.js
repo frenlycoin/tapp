@@ -40,6 +40,13 @@ class App {
         try {
             this.tg = Telegram.WebApp;
 
+            // Ask permission for bot to send messages
+            this.tg.requestWriteAccess(function(success) {
+                if (success) {
+                    console.log("Write access granted");
+                }
+            });
+
             // Expand to fullscreen
             this.tg.expand();
             // this.tg.enableClosingConfirmation();
