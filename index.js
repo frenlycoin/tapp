@@ -146,7 +146,7 @@ class App {
             });
 
             // Refresh app when page becomes visible again (e.g. switching back to tab/desktop)
-            document.addEventListener("visibilitychange", function() {
+            document.addEventListener("focus", function() {
                 if (!document.hidden) {
                     location.reload();
                 }
